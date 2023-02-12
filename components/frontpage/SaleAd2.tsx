@@ -1,4 +1,7 @@
 import React from 'react';
+import Link from "next/link";
+import Image from "next/image";
+
 
 // todo: WIP
 
@@ -8,8 +11,10 @@ export default function SaleAd() {
             <div className="pt-16 pb-80 sm:pt-24 sm:pb-40 lg:pt-40 lg:pb-48">
                 <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
                     <div className="overflow-hidden w-full rounded-lg">
-                        <img
-                            src="clothes_imgs/horizontal/img1.jpg"
+                        <Image
+                            width={300}
+                            height={500}
+                            src="/clothes_imgs/horizontal/img1.jpg"
                             alt=""
                             className="h-full w-full object-cover object-center"
                         />
@@ -19,18 +24,24 @@ export default function SaleAd() {
                             </h1>
 
                         <div className='flex justify-between absolute bottom-10'>
-                            <img
-                                src="clothes_imgs/vertical/img1.jpg"
+                            <Image
+                                width={300}
+                                height={500}
+                                src="/clothes_imgs/vertical/img1.jpg"
                                 alt=""
                                 className=" object-cover object-center w-80 mx-16 overflow-hidden rounded-lg"
                             />
-                            <img
-                                src="clothes_imgs/vertical/img1.jpg"
+                            <Image
+                                width={300}
+                                height={500}
+                                src="/clothes_imgs/vertical/img1.jpg"
                                 alt=""
                                 className="object-cover object-center w-80 overflow-hidden rounded-lg"
                             />
-                            <img
-                                src="clothes_imgs/vertical/img1.jpg"
+                            <Image
+                                width={300}
+                                height={500}
+                                src="/clothes_imgs/vertical/img1.jpg"
                                 alt=""
                                 className="object-cover object-center w-80 mx-16 overflow-hidden rounded-lg"
                             />
@@ -116,12 +127,12 @@ export default function SaleAd() {
                     {/*            </div>*/}
                     {/*        </div>*/}
 
-                    {/*        <a*/}
+                    {/*        <Link*/}
                     {/*            href="components#"*/}
                     {/*            className="inline-block rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-center font-medium text-white hover:bg-indigo-700"*/}
                     {/*        >*/}
                     {/*            Shop Collection*/}
-                    {/*        </a>*/}
+                    {/*        </Link>*/}
                     {/*    </div>*/}
                     {/*</div>*/}
                 </div>

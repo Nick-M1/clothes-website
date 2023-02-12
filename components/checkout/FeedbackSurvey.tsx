@@ -1,6 +1,7 @@
 'use client'
 import React, {useState} from 'react';
 import {XMarkIcon} from "@heroicons/react/24/solid";
+import Image from "next/image";
 
 
 type Mood = {
@@ -14,11 +15,11 @@ export default function FeedbackSurvey() {
     const [open, setOpen] = useState(true);
 
     const moodOptions: Mood[] = [
-        { idx: 0, text: 'Very unhappy', symbolSrc: 'https://img.icons8.com/color/96/null/vomited--v1.png',          symbolAlt: 'Very unhappy face' },
-        { idx: 1, text: 'Unhappy',      symbolSrc: 'https://img.icons8.com/color/96/null/sad--v1.png',              symbolAlt: 'Unhappy face' },
-        { idx: 2, text: 'Neutral',      symbolSrc: 'https://img.icons8.com/color/96/null/neutral-emoticon--v1.png', symbolAlt: 'Neutral face' },
-        { idx: 3, text: 'Happy',        symbolSrc: 'https://img.icons8.com/color/96/null/happy--v1.png',            symbolAlt: 'Happy face' },
-        { idx: 4, text: 'Ecstatic',     symbolSrc: 'https://img.icons8.com/color/96/null/smiling.png',              symbolAlt: 'Ecstatic face' },
+        { idx: 0, text: 'Very unhappy', symbolSrc: '/clothes_imgs/moods/emoji-vomited.png',     symbolAlt: 'Very unhappy face' },
+        { idx: 1, text: 'Unhappy',      symbolSrc: '/clothes_imgs/moods/emoji-sad.png',         symbolAlt: 'Unhappy face' },
+        { idx: 2, text: 'Neutral',      symbolSrc: '/clothes_imgs/moods/emoji-neutral.png',     symbolAlt: 'Neutral face' },
+        { idx: 3, text: 'Happy',        symbolSrc: '/clothes_imgs/moods/emoji-happy.png',       symbolAlt: 'Happy face' },
+        { idx: 4, text: 'Ecstatic',     symbolSrc: '/clothes_imgs/moods/emoji-smiling.png',     symbolAlt: 'Ecstatic face' },
     ]
 
     const checkboxOptions = [
@@ -49,8 +50,9 @@ export default function FeedbackSurvey() {
 
                         <div className="flex lg:flex-row md:flex-col-reverse flex-col-reverse justify-center gap-8">
                             <div className="w-full pr-3">
-                                <img
-                                    src="clothes_imgs/vertical/img5.jpg"
+                                <Image
+                                    width={700} height={700}
+                                    src="/clothes_imgs/vertical/img5.jpg"
                                     alt="girl"
                                     className='rounded-lg shadow-lg'
                                 />
@@ -77,7 +79,7 @@ export default function FeedbackSurvey() {
                                                     onClick={() => setCurrentMood(mood)}
                                                     className={ currentMood.idx == mood.idx ? "smooth-transition" : "grayscale hover:grayscale-0 smooth-transition" }
                                                 >
-                                                    <img src={mood.symbolSrc} alt={mood.symbolAlt} height={40} width={40}/>
+                                                    <Image src={mood.symbolSrc} alt={mood.symbolAlt} height={40} width={40}/>
                                                 </button>
                                             </div>
                                         ))}
@@ -91,7 +93,7 @@ export default function FeedbackSurvey() {
                                     </p>
 
                                     { checkboxOptions.map( (option, idx) => (
-                                        <div className="flex items-center pt-3">
+                                        <div className="flex items-center pt-3" key={idx}>
                                             <input
                                                 type="checkbox"
                                                 className="h-5 w-5 cursor-pointer accent-gray-800 flex-shrink-0 mx-4 hover:bg-blue-200 smooth-transition"

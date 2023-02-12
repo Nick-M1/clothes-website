@@ -1,5 +1,5 @@
 import React from 'react';
-import BasketView from "../../../components/checkout/BasketView";
+import BasketView from "../../../components/checkout/BasketView/BasketView";
 import Stepper from "../../../components/checkout/Stepper";
 
 export default function CheckoutPage() {

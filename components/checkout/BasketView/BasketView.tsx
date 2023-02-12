@@ -1,19 +1,22 @@
 'use client'
+
 import React, {FormEvent, Fragment, useEffect, useState} from "react";
-import {useStoreBasket, useStoreCurrency} from "../../src/store";
+import {useStoreBasket, useStoreCurrency} from "../../../src/store";
 import {shallow} from "zustand/shallow";
 import _, {cloneDeep} from "lodash";
-import {getById, getByIdOrThrow} from "../../lib/DATABASE_PRODUCTS";
-import {BasketItem, Product, StripeCheckoutItem} from "../../typings";
-import DisplayPrice from "../DisplayPrice";
+import {getById, getByIdOrThrow} from "../../../lib/DATABASE_PRODUCTS";
+import {BasketItem, Product, StripeCheckoutItem} from "../../../typings";
+import DisplayPrice from "../../DisplayPrice";
 import {CheckIcon, XMarkIcon} from "@heroicons/react/24/solid";
-import DisplayBasketTotal from "../DisplayBasketTotal";
+import DisplayBasketTotal from "../../DisplayBasketTotal";
 import {Menu, Transition} from "@headlessui/react";
 import {ChevronDownIcon} from "@heroicons/react/20/solid";
-import {MAX_QUANTITY} from "../../lib/DATABASE_CATEGORIES";
-import {classNames} from "../../lib/utils";
+import {MAX_QUANTITY} from "../../../lib/DATABASE_CATEGORIES";
+import {classNames} from "../../../lib/utils";
 import {useRouter} from "next/navigation";
-import {checkout} from "../../lib/checkout";
+import {checkout} from "../../../lib/checkout";
+import Link from "next/link";
+import Image from "next/image";
 
 
 export const useHasHydrated = () => {
@@ -59,9 +62,7 @@ export default function BasketView() {
 
         await checkout({
             lineItems: cart.map( item => {
-                const product = getById(item.productId)
-                if (typeof product === 'undefined')
-                    throw new Error('Product not found')
+                const product = getByIdOrThrow(item.productId)
 
                 return {
                     price: product.stripe_id , quantity: item.quantity
@@ -76,13 +77,13 @@ export default function BasketView() {
         <>
             <div className="flex md:flex-row flex-col justify-center" id="cart">
                 <div className="px-10 lg:pl-28 lg:pr-20 w-full lg:overflow-y-auto lg:overflow-x-hidden lg:h-[80vh] scrollbar" id="scroll">
-                    <a className="flex items-center text-blue-600 hover:text-blue-400 cursor-pointer" href='/'>
+                    <Link className="flex items-center text-blue-600 hover:text-blue-400 cursor-pointer" href='/'>
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width={16} height={16} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <polyline points="15 6 9 12 15 18" />
                         </svg>
                         <p className="text-sm pl-2 leading-none">Back</p>
-                    </a>
+                    </Link>
                     <p className="text-3xl font-black leading-10 text-gray-800 pt-3">Shopping Cart</p>
 
                     {/* Displays list of items - duplicate of 'SlideOver' */}
@@ -95,7 +96,8 @@ export default function BasketView() {
 
                                     <li key={index} className="flex py-6">
                                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 drop-shadow-sm">
-                                            <img
+                                            <Image
+                                                width={500} height={500}
                                                 src={product.images[0].src}
                                                 alt={product.images[0].alt}
                                                 className="h-full w-full object-cover object-center"
@@ -106,7 +108,7 @@ export default function BasketView() {
                                             <div>
                                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                                     <h3>
-                                                        <a href={`/product/${product.id}`} className='hover:text-gray-600 smooth-transition'>{product.name}</a>
+                                                        <Link href={`/product/${product.id}`} className='hover:text-gray-600 smooth-transition'>{product.name}</Link>
                                                     </h3>
                                                     <DisplayPrice price={product.price} cssClass={"mr-10"}/>
                                                 </div>

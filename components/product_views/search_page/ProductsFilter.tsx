@@ -4,12 +4,13 @@ import React, {Dispatch, Fragment, SetStateAction, useEffect, useState} from 're
 import {Dialog, Disclosure, Menu, Transition} from '@headlessui/react'
 import {XMarkIcon} from '@heroicons/react/24/outline'
 import {ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon} from '@heroicons/react/20/solid'
-import {getAllProducts, getByBreadcrumb, getSubCategories} from "../../lib/DATABASE_PRODUCTS";
-import {getSortFilters} from "../../lib/DATABASE_CATEGORIES";
-import {ListedItem, ListeditemTuple, Product, SortOptions} from "../../typings";
+import {getAllProducts, getByBreadcrumb, getSubCategories} from "../../../lib/DATABASE_PRODUCTS";
+import {getSortFilters} from "../../../lib/DATABASE_CATEGORIES";
+import {ListedItem, ListeditemTuple, Product, SortOptions} from "../../../typings";
 import ProductsListing from "./ProductsListing";
 import {cloneDeep} from "lodash";
-import {convertToSlug, titleCase} from "../../lib/utils";
+import {convertToSlug, titleCase} from "../../../lib/utils";
+import Link from "next/link";
 
 
 type Props = {
@@ -22,8 +23,8 @@ function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-
-export default function ProductsFilter({ pageTitle, level, currentCategories }: Props) {         // todo display currentCategories breadcrumb
+// todo: split into multiple components, with the parent component being 'Server-sdie rendered'
+export default function ProductsFilter({ pageTitle, level, currentCategories }: Props) {
 
     // Mobile sidebar
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
@@ -144,10 +145,10 @@ export default function ProductsFilter({ pageTitle, level, currentCategories }: 
                                         <ul role="list" className="px-2 py-3 font-medium text-gray-900">
                                             {subCategories.map((category) => (
                                                 <li key={category}>
-                                                    <a href={`/search/${currentCategories.join('/')}/${convertToSlug(category)}`}
+                                                    <Link href={`/search/${currentCategories.join('/')}/${convertToSlug(category)}`}
                                                        className="block px-2 py-3 hover:text-gray-700 smooth-transition">
                                                         {category}
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             ))}
                                         </ul>
@@ -214,9 +215,9 @@ export default function ProductsFilter({ pageTitle, level, currentCategories }: 
                             {currentCategories.slice(0, currentCategories.length-1).map((breadcrumb, index) => (
                                 <li key={index}>
                                     <div className="flex items-center">
-                                        <a href={`/search/${currentCategories.slice(0, index+1).map((breadcrumb) => breadcrumb.toLowerCase()).join('/')}`} className="mr-2 text-sm font-medium text-gray-900 smooth-transition hover:text-black">
+                                        <Link href={`/search/${currentCategories.slice(0, index+1).map((breadcrumb) => breadcrumb.toLowerCase()).join('/')}`} className="mr-2 text-sm font-medium text-gray-900 smooth-transition hover:text-black">
                                             {titleCase(breadcrumb)}
-                                        </a>
+                                        </Link>
                                         <svg
                                             width={16}
                                             height={20}
@@ -233,9 +234,9 @@ export default function ProductsFilter({ pageTitle, level, currentCategories }: 
                             ))}
                             <li className="text-sm">
                                 {currentCategories.length > 0 ?
-                                    <a href={currentCategories[currentCategories.length-1]} aria-current="page" className="font-medium text-gray-500 smooth-transition hover:text-gray-600">
+                                    <Link href={currentCategories[currentCategories.length-1]} aria-current="page" className="font-medium text-gray-500 smooth-transition hover:text-gray-600">
                                         {titleCase(currentCategories[currentCategories.length-1]).replace('-', ' ')}
-                                    </a>
+                                    </Link>
                                     : <div className='opacity-0'>placeholder</div>
                                 }
                             </li>

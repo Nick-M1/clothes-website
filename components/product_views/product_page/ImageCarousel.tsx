@@ -4,7 +4,7 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import Swipe from "react-easy-swipe";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import {ImageInfo} from "../../typings";
+import {ImageInfo} from "../../../typings";
 
 /**
  * Carousel component for nextJS and Tailwind.
@@ -53,16 +53,15 @@ export default function ImageCarousel({ images }: PagePromp) {
                         if (index === currentSlide) {
                             return (
                                 <div key={index}>
-                                    <img
+                                    <Image
                                         key={index}
                                         src={image.src}
                                         alt={image.alt}
-
-                                        // className="animate-fadeIn display-img transition-opacity duration-700 ease-in opacity-0 hover:opacity-100"
+                                        width={500}
+                                        height={500}
                                         className="display-img"
-                                        // className='display-img-darken2'
                                     />
-                                    <div className={`absolute top-0 left-0 w-full h-full flex justify-center items-center bg-white animate-fade ${displayFadein ? '' : 'hidden'}`}></div>
+                                    {/*<div className={`absolute top-0 left-0 w-full h-full flex justify-center items-center bg-white animate-fade ${displayFadein ? '' : 'hidden'}`}></div>*/}
                                 </div>
                             );
                         }

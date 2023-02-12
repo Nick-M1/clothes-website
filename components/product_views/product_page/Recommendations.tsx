@@ -1,5 +1,7 @@
-import {getAllProducts} from '../../lib/DATABASE_PRODUCTS'
-import DisplayPrice from "../DisplayPrice";
+import {getAllProducts} from '../../../lib/DATABASE_PRODUCTS'
+import DisplayPrice from "../../DisplayPrice";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Recommendations() {
     const products = getAllProducts()
@@ -12,12 +14,14 @@ export default function Recommendations() {
                 <div className="mt-10 lg:mt-6 grid grid-cols-2 gap-y-10 gap-x-6 lg:grid-cols-4 xl:gap-x-8">
                     {products.map((product) => (
                         <div key={product.id} className="group relative">
-                            <a href={`/product/${product.id}`}>
+                            <Link href={`/product/${product.id}`}>
                                 <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80 smooth-transition">
-                                    <img
+                                    <Image
                                         src={product.images[0].src}
                                         alt={product.images[0].alt}
                                         className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                                        width={500}
+                                        height={500}
                                     />
                                 </div>
                                 <div className="mt-4 flex justify-between">
@@ -30,7 +34,7 @@ export default function Recommendations() {
                                     </div>
                                     <DisplayPrice price={product.price} cssClass={"text-sm font-medium text-gray-900 pr-14"}/>                                    {/*<DisplayPrice price={product} cssClass={}*/}
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     ))}
                 </div>

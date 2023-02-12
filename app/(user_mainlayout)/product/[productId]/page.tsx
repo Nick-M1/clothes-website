@@ -1,6 +1,6 @@
 import React from 'react';
-import Recommendations from '../../../../components/product_views/Recommendations';
-import ProductInformation from "../../../../components/product_views/ProductInformation";
+import Recommendations from '../../../../components/product_views/product_page/Recommendations';
+import ProductInformationServer from "../../../../components/product_views/product_page/ProductInformationServer";
 import {getAllProducts, getById} from "../../../../lib/DATABASE_PRODUCTS";
 
 type PageProps = {
@@ -26,7 +26,7 @@ export default function Page({params: {productId}}: PageProps) {
 
     return (
         <div>
-            <ProductInformation product={product}/>
+            <ProductInformationServer product={product}/>
             <Recommendations/>
         </div>
     );

@@ -1,12 +1,13 @@
 import React from "react";
+import Image from "next/image";
 
 export default function AboutUs() {
 
     const images = [
-        "clothes_imgs/vertical/img15.jpg",
-        "clothes_imgs/vertical/img12.jpg",
-        "clothes_imgs/vertical/img13.jpg",
-        "clothes_imgs/vertical/img14.jpg"
+        "/clothes_imgs/vertical/img15.jpg",
+        "/clothes_imgs/vertical/img12.jpg",
+        "/clothes_imgs/vertical/img13.jpg",
+        "/clothes_imgs/vertical/img14.jpg"
     ]
 
     return (
@@ -21,7 +22,7 @@ export default function AboutUs() {
 
                 { images.map( imageUrl => (
                     <div className="relative group" key={imageUrl}>
-                        <img src={imageUrl} alt="pic" width={500} className="w-full display-img" />
+                        <Image height={400} width={200} src={imageUrl} alt="pic" className="w-full display-img" />
 
                         <div className=" display-img flex justify-center items-center opacity-0 bg-gradient-to-t from-gray-800 via-gray-800 group-hover:opacity-50 absolute top-0 left-0 h-full w-full" />
                         <div className=" absolute top-0 left-0 w-full h-full flex justify-center items-center opacity-0 hover:opacity-100">

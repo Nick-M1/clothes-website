@@ -3,6 +3,7 @@
 import { MegaphoneIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import React, {useState, useRef} from "react";
 import {useStoreTempbanner} from "../../src/store";
+import Link from "next/link";
 
 const BANNER_TIMER = 60
 
@@ -40,12 +41,12 @@ export default function TempBanner() {
                             </p>
                         </div>
                         <div className="order-3 mt-2 w-full flex-shrink-0 sm:order-2 sm:mt-0 sm:w-auto">
-                            <a
+                            <Link
                                 href="/search"
                                 className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-sm font-medium text-indigo-600 shadow-sm hover:bg-indigo-50"
                             >
                                 Go to sale
-                            </a>
+                            </Link>
                         </div>
                         <div className="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
                             <button

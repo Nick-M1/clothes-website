@@ -12,6 +12,8 @@ import {ChevronDownIcon} from "@heroicons/react/20/solid";
 import _ from "lodash";
 import {MAX_QUANTITY} from "../../lib/DATABASE_CATEGORIES";
 import {classNames} from "../../lib/utils";
+import Link from "next/link";
+import Image from "next/image";
 
 export const useHasHydrated = () => {
     const [hasHydrated, setHasHydrated] = useState<boolean>(false);
@@ -44,7 +46,7 @@ export default function OrderSummary() {
     return (
         <div className="flex md:flex-row flex-col">
             <div className='hidden md:block w-2/5 h-screen overflow-y-hidden'>
-                <img src='clothes_imgs/vertical/order-summary-img1.jpg'/>
+                <Image width={1000} height={1000} src='/clothes_imgs/vertical/order-summary-img1.jpg' alt='side-pic'/>
             </div>
 
             <div className='py-10 md:overflow-y-scroll md:h-screen md:scrollbar'>
@@ -66,7 +68,8 @@ export default function OrderSummary() {
 
                                     <li key={product.id} className="flex py-6">
                                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 drop-shadow-sm">
-                                            <img
+                                            <Image
+                                                width={200} height={200}
                                                 src={product.images[0].src}
                                                 alt={product.images[0].alt}
                                                 className="h-full w-full object-cover object-center"
@@ -77,7 +80,7 @@ export default function OrderSummary() {
                                             <div>
                                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                                     <h3>
-                                                        <a href={`/product/${product.id}`} className='hover:text-gray-600 smooth-transition'>{product.name}</a>
+                                                        <Link href={`/product/${product.id}`} className='hover:text-gray-600 smooth-transition'>{product.name}</Link>
                                                     </h3>
                                                     <DisplayPrice price={product.price} cssClass={"mr-10 text-sm font-semibold"}/>
                                                 </div>
@@ -154,10 +157,10 @@ export default function OrderSummary() {
 
                     <div className='pt-10'>
                         <hr className='h-px mb-6 bg-gray-300 border-0'/>
-                        <a href='/' className="flex justify-end font-medium tracking-tight text-indigo-600 hover:text-indigo-500">
+                        <Link href='/' className="flex justify-end font-medium tracking-tight text-indigo-600 hover:text-indigo-500">
                             <span className='mr-1'>Continue Shopping</span>
                             <ArrowRightIcon width={20}/>
-                        </a>
+                        </Link>
                     </div>
                 </div>
 

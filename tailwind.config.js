@@ -31,7 +31,7 @@ module.exports = {
       },
       keyframes: theme => ({
         fadeOut: {
-          '0%': { backgroundColor: theme('colors.white') },
+          '0%': { backgroundColor: theme('colors.slate.100') },
           '100%': { backgroundColor: theme('colors.transparent') },
         },
       }),

@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from "next/link";
+import Image from "next/image";
 
 export default function SaleAd() {
     return (
@@ -12,9 +14,11 @@ export default function SaleAd() {
                 >
                     <path d="M50 0H100L50 100H0L50 0Z" />
                 </svg>
-                <img
+                <Image
+                    width={300}
+                    height={500}
                     className="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full"
-                    src="clothes_imgs/horizontal/img1.jpg"
+                    src="/clothes_imgs/horizontal/img1.jpg"
                     alt=""
                 />
             </div>
@@ -30,12 +34,12 @@ export default function SaleAd() {
                         Up to 50% off outlet items
                     </p>
                     <div className="flex items-center">
-                        <a
+                        <Link
                             href="/search"
                             className="inline-flex items-center justify-center h-12 px-6 mr-6 btn-primary"
                         >
                             Go to Sale
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from "next/link";
+import Image from "next/image";
 
 
 // todo: unused
@@ -18,8 +20,9 @@ export default function Ad4() {
 
                 <ul className="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-4">
                     <li>
-                        <a href="search/men/shoes/trainers" className="relative block group">
-                            <img
+                        <Link href="search/men/shoes/trainers" className="relative block group">
+                            <Image
+                                fill
                                 src="clothes_imgs/vertical/trainers-img1.avif"
                                 alt=""
                                 className="object-cover transition duration-500 aspect-square display-img group-hover:opacity-90"
@@ -31,12 +34,13 @@ export default function Ad4() {
                                     Shop Now
                                 </span>
                             </div>
-                        </a>
+                        </Link>
                     </li>
 
                     <li>
-                        <a href="/search/women/clothing/jumpers" className="relative block group">
-                            <img
+                        <Link href="/search/women/clothing/jumpers" className="relative block group">
+                            <Image
+                                fill
                                 src="clothes_imgs/vertical/white-jumper-img1.avif"
                                 alt=""
                                 className="object-cover w-full h-full transition duration-500 aspect-square display-img group-hover:opacity-90"
@@ -49,17 +53,19 @@ export default function Ad4() {
                                     Shop Now
                                 </span>
                             </div>
-                        </a>
+                        </Link>
                     </li>
 
                     <li className="lg:col-span-3 lg:col-start-2 lg:row-span-3 lg:row-start-1 w-[747px]">
-                        <a href="/search/women/clothing/jeans" className="relative block group">
-                            <img
+                        <Link href="/search/women/clothing/jeans" className="relative block group">
+                            <Image
+                                fill
                                 src="clothes_imgs/vertical/vintage-jeans-img1.jpg"
                                 alt=""
                                 className="w-full h-full transition duration-500 display-img group-hover:hidden"
                             />
-                            <img
+                            <Image
+                                fill
                                 src="clothes_imgs/vertical/vintage-jeans-img2.jpg"
                                 alt=""
                                 className="hidden w-full h-full transition duration-500 display-img group-hover:block"
@@ -71,7 +77,7 @@ export default function Ad4() {
                                     Shop Now
                                 </span>
                             </div>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>

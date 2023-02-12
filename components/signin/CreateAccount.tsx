@@ -1,25 +1,28 @@
 import { LockClosedIcon } from '@heroicons/react/20/solid'
+import Link from "next/link";
+import Image from "next/image";
 
 export default function CreateAccount() {
     return (
         <div className="flex min-h-full items-center justify-center py-12 px-4 mt-10 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8">
                 <div>
-                    <a href='/'>
-                        <img
+                    <Link href='/'>
+                        <Image
+                            height={200} width={200}
                             className="mx-auto h-12 w-auto"
                             src="/brand-logo.png"
                             alt="Shopping logo"
                         />
-                    </a>
+                    </Link>
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
                         Create account
                     </h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
                         Already registered?{' '}
-                        <a href="/signin" className="font-medium text-indigo-600 hover:text-indigo-500 smooth-transition">
+                        <Link href="/signin" className="font-medium text-indigo-600 hover:text-indigo-500 smooth-transition">
                             Sign in
-                        </a>
+                        </Link>
                     </p>
                 </div>
                 <form className="mt-8 space-y-6" action="components#" method="POST">
@@ -81,12 +84,6 @@ export default function CreateAccount() {
                                 Remember me
                             </label>
                         </div>
-
-                        {/*<div className="text-sm">*/}
-                        {/*    <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500 smooth-transition">*/}
-                        {/*        Forgot your password?*/}
-                        {/*    </a>*/}
-                        {/*</div>*/}
                     </div>
 
                     <div>
@@ -110,7 +107,7 @@ export default function CreateAccount() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <a href="components#" className="btn-primary btn-bouncy flex bg-blue-500 hover:bg-blue-700">
+                        <Link href="components#" className="btn-primary btn-bouncy flex bg-blue-500 hover:bg-blue-700">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="currentColor" className="ml-5 mr-2">
                                 <path
@@ -118,8 +115,8 @@ export default function CreateAccount() {
                                 />
                             </svg>
                             <span className="sr-only">Continue with</span> Google
-                        </a>
-                        <a href="components#" className="bg-black hover:bg-gray-800 flex btn-bouncy btn-primary">
+                        </Link>
+                        <Link href="components#" className="bg-black hover:bg-gray-800 flex btn-bouncy btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="currentColor" className="ml-5 mr-2">
                                 <path
@@ -127,7 +124,7 @@ export default function CreateAccount() {
                                 />
                             </svg>
                             <span className="sr-only">Continue with</span> Apple
-                        </a>
+                        </Link>
                     </div>
                 </div>
 

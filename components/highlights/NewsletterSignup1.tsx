@@ -4,6 +4,7 @@ import React, {FormEvent, useState} from "react";
 import {XMarkIcon} from "@heroicons/react/24/solid";
 import {EnvelopeIcon, MagnifyingGlassIcon} from "@heroicons/react/24/outline";
 import {useRouter} from "next/navigation";
+import Image from "next/image";
 
 // todo: If not using as a popup, remove the 'show' state
 
@@ -31,8 +32,10 @@ export default function NewsletterSignup1() {
             {/*        height={24}/>*/}
             {/*</div>*/}
             <div className="relative w-full mx-auto">
-                <img
-                    src="clothes_imgs/horizontal/img2.jpg"
+                <Image
+                    width={1000}
+                    height={1000}
+                    src="/clothes_imgs/horizontal/img2.jpg"
                     alt='pic'
                     className="w-full rounded-lg drop-shadow-md grayscale-[20%] hover:grayscale-[50%]"
                 />

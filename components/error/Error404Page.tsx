@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react';
+import Link from "next/link";
 
 export default function Error404Page({ reset }: { reset: () => void; }) {
     return (
@@ -26,12 +27,12 @@ export default function Error404Page({ reset }: { reset: () => void; }) {
                             >
                                 Refresh page
                             </button>
-                            <a
+                            <Link
                                 href="/"
                                 className="mx-3 bg-indigo-500 hover:bg-indigo-700 inline-block rounded-lg border border-white px-8 py-3 text-center text-base font-semibold text-white transition"
                             >
                                 Go To Home
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

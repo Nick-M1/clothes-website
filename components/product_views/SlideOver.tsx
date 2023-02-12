@@ -14,6 +14,8 @@ import {CheckIcon} from "@heroicons/react/24/solid";
 import {ChevronDownIcon} from "@heroicons/react/20/solid";
 import {MAX_QUANTITY} from "../../lib/DATABASE_CATEGORIES";
 import {classNames} from "../../lib/utils";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function SideOver() {
     const [cart, updateCart, updateNewestItemAdded] = useStoreBasket(
@@ -91,7 +93,8 @@ export default function SideOver() {
 
                                                             <li key={product.id} className="flex py-6">
                                                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                                    <img
+                                                                    <Image
+                                                                        height={200} width={200}
                                                                         src={product.images[0].src}
                                                                         alt={product.images[0].alt}
                                                                         className="h-full w-full object-cover object-center"
@@ -102,7 +105,7 @@ export default function SideOver() {
                                                                     <div>
                                                                         <div className="flex justify-between text-base font-medium text-gray-900">
                                                                             <h3>
-                                                                                <a href={`/product/${product.id}`}>{product.name}</a>
+                                                                                <Link href={`/product/${product.id}`} onClick={() => updateSlideover(false)}>{product.name}</Link>
                                                                             </h3>
                                                                             <DisplayPrice price={product.price} cssClass={"mr-10"}/>
                                                                         </div>
@@ -185,12 +188,12 @@ export default function SideOver() {
                                             </div>
                                             <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                             <div className="mt-6">
-                                                <a
+                                                <Link
                                                     href="/checkout"
                                                     className="flex items-center justify-center px-6 py-3 btn-primary"
                                                 >
                                                     Checkout
-                                                </a>
+                                                </Link>
                                             </div>
                                             <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                                                 <p>

@@ -10,6 +10,8 @@ import Searchbar from "../Searchbar";
 import {convertToSlug} from "../../lib/utils";
 import CurrencySelector from "../CurrencySelector";
 import {BasketItem} from "../../typings";
+import Link from "next/link";
+import Image from "next/image";
 
 
 function classNames(...classes: string[]) {
@@ -46,7 +48,7 @@ export default function Banner() {
     }
 
     const [totalQuantity, setTotalQuantity] = useState(calcTotalQuantity(useStoreBasket.getState().cart))
-    const [categoriesOpen, setCategoriesOpen] = useState(false)
+    const [categoriesOpen, setCategoriesOpen] = useState(false);        // For mobile side-panel
 
     const updateSlideover = useStoreSlideover(
         (state) => state.updateOpen,
@@ -138,12 +140,12 @@ export default function Banner() {
                                                     {category.featured.map((item) => (
                                                         <div key={item.name} className="group relative text-sm">
                                                             <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                                                <img src={item.imageSrc} alt={item.imageAlt} className="object-cover object-center" />
+                                                                <Image height={200} width={200} src={item.imageSrc} alt={item.imageAlt} className="object-cover object-center" />
                                                             </div>
-                                                            <a href={`/search/${convertToSlugWrapper(category.name)}/${convertToSlugWrapper(item.name)}`} className="mt-6 block font-medium text-gray-900">
+                                                            <Link href={`/search/${convertToSlugWrapper(category.name)}/${convertToSlugWrapper(item.name)}`} onClick={() => setCategoriesOpen(false)} className="mt-6 block font-medium text-gray-900">
                                                                 <span className="absolute inset-0 z-10" aria-hidden="true" />
                                                                 {item.name}
-                                                            </a>
+                                                            </Link>
                                                             <p aria-hidden="true" className="mt-1">
                                                                 Shop now
                                                             </p>
@@ -162,9 +164,9 @@ export default function Banner() {
                                                         >
                                                             {section.items.map((item) => (
                                                                 <li key={item.name} className="flow-root">
-                                                                    <a href={`/search/${convertToSlugWrapper(category.name)}/${convertToSlugWrapper(item.name)}`} className="-m-2 block p-2 text-gray-500">
+                                                                    <Link href={`/search/${convertToSlugWrapper(category.name)}/${convertToSlugWrapper(item.name)}`} onClick={() => setCategoriesOpen(false)} className="-m-2 block p-2 text-gray-500">
                                                                         {item.name}
-                                                                    </a>
+                                                                    </Link>
                                                                 </li>
                                                             ))}
                                                         </ul>
@@ -178,23 +180,23 @@ export default function Banner() {
                                 <div className="space-y-6 border-t border-gray-200 py-6 px-4">
                                     {pages.map((page) => (
                                         <div key={page.name} className="flow-root">
-                                            <a href={page.href} className="-m-2 block p-2 font-medium text-gray-900 smooth-transition">
+                                            <Link href={page.href} className="-m-2 block p-2 font-medium text-gray-900 smooth-transition">
                                                 {page.name}
-                                            </a>
+                                            </Link>
                                         </div>
                                     ))}
                                 </div>
 
                                 <div className="space-y-6 border-t border-gray-200 py-6 px-4">
                                     <div className="flow-root">
-                                        <a href={`/signin`} className="-m-2 block p-2 font-medium text-gray-900 smooth-transition">
+                                        <Link href={`/signin`} className="-m-2 block p-2 font-medium text-gray-900 smooth-transition">
                                             Sign in
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className="flow-root">
-                                        <a href={`/createaccount`} className="-m-2 block p-2 font-medium text-gray-900 smooth-transition">
+                                        <Link href={`/createaccount`} className="-m-2 block p-2 font-medium text-gray-900 smooth-transition">
                                             Create account
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </Dialog.Panel>
@@ -223,13 +225,14 @@ export default function Banner() {
 
                             {/* Logo */}
                             <div className="ml-4 lg:ml-0">
-                                <a href={`/`}>
-                                    <img
+                                <Link href={`/`}>
+                                    <Image
+                                        height={100} width={100}
                                         className="h-8 w-auto"
                                         src="/brand-logo.png"
                                         alt=""
                                     />
-                                </a>
+                                </Link>
                             </div>
                             <span className="hidden sm:block lg:hidden ml-3 text-l font-semibold whitespace-nowrap dark:text-white">Shopping Website</span>
 
@@ -273,7 +276,8 @@ export default function Banner() {
                                                                             {category.featured.map((item) => (
                                                                                 <div key={item.name} className="group relative text-base sm:text-sm">
                                                                                     <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75 smooth-transition">
-                                                                                        <img
+                                                                                        <Image
+                                                                                            height={300} width={300}
                                                                                             src={item.imageSrc}
                                                                                             alt={item.imageAlt}
                                                                                             className="object-cover object-center"
@@ -322,26 +326,26 @@ export default function Banner() {
                                     ))}
 
                                     {pages.map((page) => (
-                                        <a
+                                        <Link
                                             key={page.name}
                                             href={page.href}
                                             className="flex items-center text-sm font-medium text-gray-700 hover:text-blue-700 dark:text-gray-400 dark:hover:text-white border-b-2 py-5 mt-1 border-transparent hover:border-gray-300 smooth-transition"
                                         >
                                             {page.name}
-                                        </a>
+                                        </Link>
                                     ))}
                                 </div>
                             </Popover.Group>
 
                             <div className="ml-auto flex items-center">
                                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                                    <a href={`/signin`} className="border-b-2 py-5 mt-1 navbar-text">
+                                    <Link href={`/signin`} className="border-b-2 py-5 mt-1 navbar-text">
                                         Sign in
-                                    </a>
+                                    </Link>
                                     <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                                    <a href={`/createaccount`} className="border-b-2 py-5 mt-1 navbar-text">
+                                    <Link href={`/createaccount`} className="border-b-2 py-5 mt-1 navbar-text">
                                         Create account
-                                    </a>
+                                    </Link>
                                 </div>
 
                                 <div className="hidden lg:ml-8 lg:flex smooth-transition">

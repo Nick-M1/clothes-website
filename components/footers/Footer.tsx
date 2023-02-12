@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import FooterDarkmodeButton from "./FooterDarkmodeButton";
+// import FooterDarkmodeButton from "./FooterDarkmodeButton";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
     // todo: Dark mode button
@@ -9,22 +11,22 @@ export default function Footer() {
             <div className="flex items-center justify-between">
 
                 <div>
-                    <a href="/" className="flex items-center mb-4 sm:mb-0">
-                        <img src="/brand-logo.png" className="h-8 mr-3" alt="Logo"/>
+                    <Link href="/" className="flex items-center mb-4 sm:mb-0">
+                        <Image height={100} width={100} src="/brand-logo.png" className="h-8 mr-3" alt="Logo"/>
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Shopping Website</span>
-                    </a>
+                    </Link>
                     <ul className="flex flex-wrap items-left mb-6 text-sm text-gray-500 sm:mb-0 lg:mt-2 dark:text-gray-400">
                         <li>
-                            <a href="/aboutus" className="mr-4 hover:underline md:mr-6 smooth-transition">About</a>
+                            <Link href="/aboutus" className="mr-4 hover:underline md:mr-6 smooth-transition">About</Link>
                         </li>
                         <li>
-                            <a href="/aboutus" className="mr-4 hover:underline md:mr-6 smooth-transition">Privacy Policy</a>
+                            <Link href="/aboutus" className="mr-4 hover:underline md:mr-6 smooth-transition">Privacy Policy</Link>
                         </li>
                         <li>
-                            <a href="/faqs" className="mr-4 hover:underline md:mr-6  smooth-transition">FAQs</a>
+                            <Link href="/faqs" className="mr-4 hover:underline md:mr-6  smooth-transition">FAQs</Link>
                         </li>
                         <li>
-                            <a href="/aboutus" className="hover:underline smooth-transition">Contact</a>
+                            <Link href="/aboutus" className="hover:underline smooth-transition">Contact</Link>
                         </li>
                     </ul>
 

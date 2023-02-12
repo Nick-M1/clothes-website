@@ -4,13 +4,15 @@ import {Dispatch, Fragment, SetStateAction, useEffect, useState} from 'react'
 import { Dialog, RadioGroup, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/20/solid'
-import {getById} from "../../lib/DATABASE_PRODUCTS";
-import {useStoreBasket, useStoreCurrency} from "../../src/store";
+import {getById} from "../../../lib/DATABASE_PRODUCTS";
+import {useStoreBasket, useStoreCurrency} from "../../../src/store";
 import {shallow} from "zustand/shallow";
-import {ColorOptions, ListedItem, SizeOptions} from "../../typings";
+import {ColorOptions, ListedItem, SizeOptions} from "../../../typings";
 import _, {cloneDeep} from "lodash";
 import {structuredClone} from "next/dist/compiled/@edge-runtime/primitives/structured-clone";
-import DisplayPrice from "../DisplayPrice";
+import DisplayPrice from "../../DisplayPrice";
+import Link from "next/link";
+import Image from "next/image";
 
 
 type Props = {
@@ -109,7 +111,7 @@ export default function ProductQuickview({productId, productIndex, productState,
 
                                     <div className="grid w-full grid-cols-1 items-start gap-y-8 gap-x-6 sm:grid-cols-12 lg:gap-x-8">
                                         <div className="aspect-w-2 aspect-h-3 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-                                            <img src={product.images[0].src} alt={product.images[0].alt} className="object-cover object-center" />
+                                            <Image height={300} width={300} src={product.images[0].src} alt={product.images[0].alt} className="object-cover object-center" />
                                         </div>
                                         <div className="sm:col-span-8 lg:col-span-7">
                                             <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{product.name}</h2>
@@ -138,9 +140,9 @@ export default function ProductQuickview({productId, productIndex, productState,
                                                             ))}
                                                         </div>
                                                         <p className="sr-only">{product.rating} out of 5 stars</p>
-                                                        <a href="components#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500 smooth-transition">
+                                                        <Link href="components#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500 smooth-transition">
                                                             {product.reviewCount} reviews
-                                                        </a>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </section>
@@ -194,9 +196,9 @@ export default function ProductQuickview({productId, productIndex, productState,
                                                     <div className="mt-10">
                                                         <div className="flex items-center justify-between">
                                                             <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                                                            <a href="components#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500 smooth-transition">
+                                                            <Link href="components#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500 smooth-transition">
                                                                 Size guide
-                                                            </a>
+                                                            </Link>
                                                         </div>
 
                                                         <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
@@ -266,7 +268,7 @@ export default function ProductQuickview({productId, productIndex, productState,
                                                     </button>
                                                 </form>
                                                 <div className="py-3 text-right italic">
-                                                    <a href={`/product/${productId}`}>More info...</a>
+                                                    <Link href={`/product/${productId}`}>More info...</Link>
                                                 </div>
 
                                             </section>

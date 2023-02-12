@@ -1,6 +1,7 @@
 'use client'
 import React, {FormEvent, useState} from "react";
 import {EnvelopeIcon} from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 export default function NewsletterSignup2() {
     const [email, setEmail] = useState("");
@@ -47,7 +48,7 @@ export default function NewsletterSignup2() {
                 </div>
 
                 <div>
-                    <img src="https://i.ibb.co/CzGcZF4/pexels-katie-e-3671083-1.png" alt="girl"
+                    <Image src="/clothes_imgs/vertical/newsletter-img2.png" width={500} height={500} alt="girl"
                          className='display-img-darken'
                     />
                 </div>

@@ -1,11 +1,12 @@
 'use client'
 
-import {ListedItem, ListeditemTuple, Product, SortOptions} from "../../typings";
+import {ListedItem, ListeditemTuple, Product, SortOptions} from "../../../typings";
 import {Dispatch, FormEvent, SetStateAction, useEffect, useState} from "react";
 import ProductQuickview from "./ProductQuickview";
 import {cloneDeep} from "lodash";
-import DisplayPrice from "../DisplayPrice";
+import DisplayPrice from "../../DisplayPrice";
 import {useRouter} from "next/navigation";
+import Image from "next/image";
 
 type Props = {
     productsState: ListedItem[];
@@ -81,7 +82,8 @@ function ProductsListing({ productsState, setProductsState, sortSelected, gridCo
 
                             <a onClick={(e) => setProductsStateWrapper(e, index, listeditem.product.id) } key={listeditem.product.id} href={listeditem.product.href} className="group">
                                 <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8 ">
-                                    <img
+                                    <Image
+                                        height={500} width={250}
                                         src={listeditem.product.images[0].src}
                                         alt={listeditem.product.images[0].alt}
                                         className="h-full w-full object-cover object-center group-hover:opacity-75 smooth-transition"

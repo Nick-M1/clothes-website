@@ -8,6 +8,7 @@ import {
     ArrowPathRoundedSquareIcon,
     MagnifyingGlassCircleIcon
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 export default function FaqsMain({showSearchbar}: {showSearchbar: boolean}) {
     const [show1, setShow1] = useState(false);
@@ -35,8 +36,8 @@ export default function FaqsMain({showSearchbar}: {showSearchbar: boolean}) {
             </div>
             <div className=" flex md:flex-row flex-col md:space-x-8 md:mt-16 mt-8">
                 <div className=" md:w-5/12 lg:w-4/12 w-full">
-                    <img src="https://i.ibb.co/8bCs73h/pexels-ron-lach-8128069-1.png" alt="Img of Glass bottle" className="w-full md:block hidden drop-shadow-lg rounded-lg" />
-                    <img src="https://i.ibb.co/gZMfQJq/pexels-ron-lach-8128069-1-1.png" alt="Img of Glass bottle" className="w-full md:hidden block drop-shadow-lg rounded-lg" />
+                    <Image width={500} height={500} src="/clothes_imgs/vertical/faqs-img1.png" alt="Img of Glass bottle" className="w-full md:block hidden drop-shadow-lg rounded-lg" />
+                    <Image width={500} height={500} src="/clothes_imgs/vertical/faqs-img2.png" alt="Img of Glass bottle" className="w-full md:hidden block drop-shadow-lg rounded-lg" />
                 </div>
                 <div className=" md:w-7/12 lg:w-8/12 w-full md:mt-0 sm:mt-14 mt-10">
                     {/* <!-- Shipping Section --> */}

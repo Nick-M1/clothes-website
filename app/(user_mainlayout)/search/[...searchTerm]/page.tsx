@@ -1,4 +1,4 @@
-import ProductsFilter from "../../../../components/product_views/ProductsFilter";
+import ProductsFilter from "../../../../components/product_views/search_page/ProductsFilter";
 import {titleCase} from "../../../../lib/utils";
 
 type PageProps = {

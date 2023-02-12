@@ -94,7 +94,7 @@ export default function OrderSummary() {
                     :<div></div>
                 }
 
-                <div className="flex flex-col py-5 justify-between scale-90 px-10">
+                <div className="flex flex-col py-5 justify-between scale-90 px-6 md:px-10">
                     <hr className='h-px my-4 bg-gray-300 border-0'/>
 
                     <div className="flex items-center justify-between pt-6">

@@ -1,11 +1,13 @@
-import {getAllProducts} from '../../../lib/DATABASE_PRODUCTS'
 import DisplayPrice from "../../DisplayPrice";
 import Link from "next/link";
 import Image from "next/image";
+import {Product} from "../../../typings";
 
-export default function Recommendations() {
-    const products = getAllProducts()
+type Props = {
+    products: Product[];
+}
 
+export default function Recommendations({products}: Props) {
     return (
         <div className="bg-white">
             <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">

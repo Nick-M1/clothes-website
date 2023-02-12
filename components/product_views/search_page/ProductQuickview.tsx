@@ -7,7 +7,7 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import {getById} from "../../../lib/DATABASE_PRODUCTS";
 import {useStoreBasket, useStoreCurrency} from "../../../src/store";
 import {shallow} from "zustand/shallow";
-import {ColorOptions, ListedItem, SizeOptions} from "../../../typings";
+import {ColorOptions, ListedItem, Product, SizeOptions} from "../../../typings";
 import _, {cloneDeep} from "lodash";
 import {structuredClone} from "next/dist/compiled/@edge-runtime/primitives/structured-clone";
 import DisplayPrice from "../../DisplayPrice";
@@ -16,7 +16,7 @@ import Image from "next/image";
 
 
 type Props = {
-    productId: number;
+    product: Product;
     productIndex: number
     productState: ListedItem[];
     setProductsState: Dispatch<SetStateAction<ListedItem[]>>;
@@ -26,10 +26,7 @@ function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function ProductQuickview({productId, productIndex, productState, setProductsState}: Props ) {           //todo: fix color & size icons not staying on
-    const product = getById(productId)
-    if (!product)
-        throw new Error("Product not found")
+export default function ProductQuickview({ product, productIndex, productState, setProductsState }: Props ) {           //todo: fix color & size icons not staying on
 
     const setOpen = (newValue: boolean) => {
         setProductsState(prevState => {
@@ -268,7 +265,7 @@ export default function ProductQuickview({productId, productIndex, productState,
                                                     </button>
                                                 </form>
                                                 <div className="py-3 text-right italic">
-                                                    <Link href={`/product/${productId}`}>More info...</Link>
+                                                    <Link href={`/product/${product.id}`}>More info...</Link>
                                                 </div>
 
                                             </section>

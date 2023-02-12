@@ -18,6 +18,7 @@ export async function generateStaticParams() {
 }
 
 export default function Page({params: {productId}}: PageProps) {
+    const allProducts = getAllProducts()
     const product = getById(productId)
 
     if (!product)
@@ -27,7 +28,7 @@ export default function Page({params: {productId}}: PageProps) {
     return (
         <div>
             <ProductInformationServer product={product}/>
-            <Recommendations/>
+            <Recommendations products={allProducts}/>
         </div>
     );
 }

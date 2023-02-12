@@ -92,7 +92,7 @@ function ProductsListing({ productsState, setProductsState, sortSelected, gridCo
                                 <h3 className="mt-4 text-sm text-gray-700">{listeditem.product.name}</h3>
                                 <DisplayPrice price={listeditem.product.price} cssClass={"mt-1 text-lg font-medium text-gray-900"}/>
 
-                                <ProductQuickview key={index} productId={listeditem.product.id} productIndex={index} productState={productsState} setProductsState={setProductsState} />
+                                <ProductQuickview key={index} product={listeditem.product} productIndex={index} productState={productsState} setProductsState={setProductsState} />
                             </a>
 
                     ))}

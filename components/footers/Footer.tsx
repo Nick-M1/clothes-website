@@ -12,7 +12,7 @@ export default function Footer() {
 
                 <div>
                     <Link href="/" className="flex items-center mb-4 sm:mb-0">
-                        <Image height={100} width={100} src="/brand-logo.png" className="h-8 mr-3" alt="Logo"/>
+                        <Image height={30} width={40} src="/brand-logo.png" className="h-8 mr-3" alt="Logo"/>
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Shopping Website</span>
                     </Link>
                     <ul className="flex flex-wrap items-left mb-6 text-sm text-gray-500 sm:mb-0 lg:mt-2 dark:text-gray-400">

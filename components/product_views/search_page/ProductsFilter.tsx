@@ -4,7 +4,7 @@ import React, {Dispatch, Fragment, SetStateAction, useEffect, useState} from 're
 import {Dialog, Disclosure, Menu, Transition} from '@headlessui/react'
 import {XMarkIcon} from '@heroicons/react/24/outline'
 import {ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon} from '@heroicons/react/20/solid'
-import {getAllProducts, getByBreadcrumb, getSubCategories} from "../../../lib/DATABASE_PRODUCTS";
+import {getByBreadcrumb, getSubCategories} from "../../../lib/DATABASE_PRODUCTS";
 import {getSortFilters} from "../../../lib/DATABASE_CATEGORIES";
 import {ListedItem, ListeditemTuple, Product, SortOptions} from "../../../typings";
 import ProductsListing from "./ProductsListing";
@@ -14,9 +14,12 @@ import Link from "next/link";
 
 
 type Props = {
-    pageTitle: string
-    level: number;
-    currentCategories: string[]
+    pageTitle: string;
+    currentCategories: string[];
+
+    allProducts: Product[];
+    subCategories: string[];
+    filters: {id: string, name: string, options: string[]}[];
 }
 
 function classNames(...classes: string[]) {
@@ -24,7 +27,7 @@ function classNames(...classes: string[]) {
 }
 
 // todo: split into multiple components, with the parent component being 'Server-sdie rendered'
-export default function ProductsFilter({ pageTitle, level, currentCategories }: Props) {
+export default function ProductsFilter({ pageTitle, currentCategories, allProducts, subCategories, filters }: Props) {
 
     // Mobile sidebar
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
@@ -41,11 +44,6 @@ export default function ProductsFilter({ pageTitle, level, currentCategories }: 
         { name: 'Price: High to Low',  func: ((item1: ListeditemTuple, item2: ListeditemTuple) => item2.a.product.price - item1.a.product.price)},
     ]
     const [selectedSort, setSelectedSort] = useState(0)
-
-    // Database Getters
-    const allProducts = getByBreadcrumb(currentCategories)
-    const subCategories = getSubCategories(allProducts, level)
-    const filters = getSortFilters(allProducts)
 
     // States for Quickview
     const [productsState, setProductsState] = useState<ListedItem[]>(

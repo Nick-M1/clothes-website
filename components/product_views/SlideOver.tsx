@@ -6,7 +6,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import {BasketItem, Product} from "../../typings";
 import {useStoreBasket, useStoreSlideover} from "../../src/store";
 import {shallow} from "zustand/shallow";
-import {getById, getByIdOrThrow} from "../../lib/DATABASE_PRODUCTS";
+import {getProductById, getByIdOrThrow} from "../../lib/databases/DATABASE_API";
 import DisplayPrice from "../DisplayPrice";
 import DisplayBasketTotal from "../DisplayBasketTotal";
 import _, {cloneDeep} from "lodash";
@@ -88,15 +88,14 @@ export default function SideOver() {
                                             <div className="mt-8">
                                                 <div className="flow-root">
                                                     <ul role="list" className="-my-6 divide-y divide-gray-200">
-                                                        { cart.map((productBasket) => { return [getByIdOrThrow(productBasket.productId), productBasket] as [Product, BasketItem] })
-                                                            .map(([product, basketitem], index) => (
+                                                        { cart.map( (basketitem, index) => (
 
-                                                            <li key={product.id} className="flex py-6">
+                                                            <li key={basketitem.product.id} className="flex py-6">
                                                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                                                     <Image
                                                                         height={200} width={200}
-                                                                        src={product.images[0].src}
-                                                                        alt={product.images[0].alt}
+                                                                        src={basketitem.product.images[0].src}
+                                                                        alt={basketitem.product.images[0].alt}
                                                                         className="h-full w-full object-cover object-center"
                                                                     />
                                                                 </div>
@@ -105,9 +104,9 @@ export default function SideOver() {
                                                                     <div>
                                                                         <div className="flex justify-between text-base font-medium text-gray-900">
                                                                             <h3>
-                                                                                <Link href={`/product/${product.id}`} onClick={() => updateSlideover(false)}>{product.name}</Link>
+                                                                                <Link href={`/product/${basketitem.product.id}`} onClick={() => updateSlideover(false)}>{basketitem.product.name}</Link>
                                                                             </h3>
-                                                                            <DisplayPrice price={product.price} cssClass={"mr-10"}/>
+                                                                            <DisplayPrice price={basketitem.product.price} cssClass={"mr-10"}/>
                                                                         </div>
                                                                         <p className="mt-1 text-sm text-gray-500">{`${basketitem.color.name}  ${basketitem.size.name}`}</p>
                                                                     </div>

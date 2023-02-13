@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import {getAllProducts} from "../../lib/DATABASE_PRODUCTS";
+import {getAllProducts} from "../../lib/databases/DATABASE_API";
 
 type StripeResponse = {
     productId: string
@@ -9,7 +9,7 @@ type StripeResponse = {
 }
 
 async function addAllToStripe() {
-    const allProducts = getAllProducts()
+    const allProducts = await getAllProducts()
     const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);            // client prop, so give it real key (need to set up a NextJS API for this)
 
     const myList: StripeResponse[] = []

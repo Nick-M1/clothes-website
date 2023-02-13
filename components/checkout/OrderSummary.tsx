@@ -3,7 +3,7 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {useStoreBasket, useStoreCurrency} from "../../src/store";
 import {shallow} from "zustand/shallow";
-import {getByIdOrThrow} from "../../lib/DATABASE_PRODUCTS";
+import {getByIdOrThrow} from "../../lib/databases/DATABASE_API";
 import {BasketItem, Product} from "../../typings";
 import DisplayPrice from "../DisplayPrice";
 import {ArrowRightIcon, CheckIcon, CreditCardIcon, XMarkIcon} from "@heroicons/react/24/solid";
@@ -38,7 +38,7 @@ export default function OrderSummary() {
     const totalPrice = cart.length == 0
         ? 0
         : cart
-            .map(p => p.price * p.quantity)
+            .map(p => p.product.price * p.quantity)
             .reduce((a, b) => a + b )
 
     const hasHydrated = useHasHydrated()
@@ -63,15 +63,14 @@ export default function OrderSummary() {
                     <div className="flow-root scale-90 px-7">
                         <hr className='h-px my-6 bg-gray-200 border-0'/>
                         <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            { cart.map((productBasket) => { return [getByIdOrThrow(productBasket.productId), productBasket] as [Product, BasketItem] })
-                                .map(([product, basketitem], index) => (
+                            { cart.map( (basketitem, index) => (
 
-                                    <li key={product.id} className="flex py-6">
+                                    <li key={basketitem.product.id} className="flex py-6">
                                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 drop-shadow-sm">
                                             <Image
                                                 width={200} height={200}
-                                                src={product.images[0].src}
-                                                alt={product.images[0].alt}
+                                                src={basketitem.product.images[0].src}
+                                                alt={basketitem.product.images[0].alt}
                                                 className="h-full w-full object-cover object-center"
                                             />
                                         </div>
@@ -80,9 +79,9 @@ export default function OrderSummary() {
                                             <div>
                                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                                     <h3>
-                                                        <Link href={`/product/${product.id}`} className='hover:text-gray-600 smooth-transition'>{product.name}</Link>
+                                                        <Link href={`/product/${basketitem.product.id}`} className='hover:text-gray-600 smooth-transition'>{basketitem.product.name}</Link>
                                                     </h3>
-                                                    <DisplayPrice price={product.price} cssClass={"mr-10 text-sm font-semibold"}/>
+                                                    <DisplayPrice price={basketitem.product.price} cssClass={"mr-10 text-sm font-semibold"}/>
                                                 </div>
                                                 <p className="mt-1 text-sm text-gray-500">{`${basketitem.color.name}  ${basketitem.size.name}`}</p>
                                             </div>

@@ -1,0 +1,15 @@
+
+import React from 'react';
+import {collection, getDocs, orderBy, query} from "@firebase/firestore";
+import {db} from "../../firebase";
+
+export default async function Demo2() {
+    // const {data: session} = useSession()
+    // console.log(chats?.docs[0].data())
+
+
+
+    return (
+        <h1>hello</h1>
+    );
+}

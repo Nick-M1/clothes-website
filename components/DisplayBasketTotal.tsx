@@ -24,7 +24,7 @@ export default function DisplayBasketTotal({cssClass}: PageProps) {
     const totalPrice = cart.length == 0
         ? 0
         : cart
-        .map(p => p.price * p.quantity)
+        .map(p => p.product.price * p.quantity)
         .reduce((a, b) => a + b )
 
     const hasHydrated = useHasHydrated()

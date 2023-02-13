@@ -1,0 +1,36 @@
+'use client'
+import React, {useState} from 'react';
+import {useSession} from "next-auth/react";
+import {useCollection} from "react-firebase-hooks/firestore";
+import {collection, orderBy, query} from "@firebase/firestore";
+import {db} from "../../firebase";
+import {usePathname, useRouter} from "next/navigation";
+
+type Props = {
+    id: string
+}
+
+export default function Demo2b({ id }: Props) {
+    const pathname = usePathname()
+    const router = useRouter()
+    const {data: session} = useSession()
+    const [active, setActive] = useState(false)
+
+    const [accounts] = useCollection(
+        query(
+            collection(db, 'accounts', session?.user?.email!, 'account'),
+            orderBy('createdAt', 'asc')
+    ))
+    console.log(accounts?.docs.map(d => d.data()))
+
+    return (
+        <div>
+            {/*{ chats?.docs.map(chat => <p>{chat.id}</p>) }*/}
+
+            { accounts?.docs.map(doc =>
+                <p>{doc.data().messages.join(' ')}</p>
+            )}
+
+        </div>
+    );
+}

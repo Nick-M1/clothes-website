@@ -4,7 +4,7 @@ import React, {FormEvent, Fragment, useEffect, useState} from "react";
 import {useStoreBasket, useStoreCurrency} from "../../../src/store";
 import {shallow} from "zustand/shallow";
 import _, {cloneDeep} from "lodash";
-import {getById, getByIdOrThrow} from "../../../lib/DATABASE_PRODUCTS";
+import {getProductById, getByIdOrThrow} from "../../../lib/databases/DATABASE_API";
 import {BasketItem, Product, StripeCheckoutItem} from "../../../typings";
 import DisplayPrice from "../../DisplayPrice";
 import {CheckIcon, XMarkIcon} from "@heroicons/react/24/solid";
@@ -41,7 +41,7 @@ export default function BasketView() {
     const totalPrice = cart.length == 0
         ? 0
         : cart
-            .map(p => p.price * p.quantity)
+            .map(p => p.product.price * p.quantity)
             .reduce((a, b) => a + b )
 
 
@@ -60,13 +60,18 @@ export default function BasketView() {
     const paymentHandler = async (e: any) => {
         e.preventDefault();
 
+        console.log('ehhe')
+
         await checkout({
             lineItems: cart.map( item => {
-                const product = getByIdOrThrow(item.productId)
+                const stripe_id = item.product.stripe_ids.find(p => p.size === item.size.name && p.color === item.color.name)
+                if (typeof stripe_id === 'undefined')
+                    throw new Error("Stripe-id couldn't be found")
 
                 return {
-                    price: product.stripe_id , quantity: item.quantity
-                } as StripeCheckoutItem
+                    price: stripe_id.stripe_id,
+                    quantity: item.quantity
+                } as unknown as StripeCheckoutItem
             } )
         })
     };
@@ -91,15 +96,14 @@ export default function BasketView() {
                     <div className="flow-root pt-3">
                         <hr className='h-px my-6 bg-gray-200 border-0'/>
                         <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            { cart.map((productBasket) => { return [getByIdOrThrow(productBasket.productId), productBasket] as [Product, BasketItem] })
-                                .map(([product, basketitem], index) => (
+                            { cart.map( (basketitem, index) => (
 
                                     <li key={index} className="flex py-6">
                                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 drop-shadow-sm">
                                             <Image
                                                 width={500} height={500}
-                                                src={product.images[0].src}
-                                                alt={product.images[0].alt}
+                                                src={basketitem.product.images[0].src}
+                                                alt={basketitem.product.images[0].alt}
                                                 className="h-full w-full object-cover object-center"
                                             />
                                         </div>
@@ -108,9 +112,9 @@ export default function BasketView() {
                                             <div>
                                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                                     <h3>
-                                                        <Link href={`/product/${product.id}`} className='hover:text-gray-600 smooth-transition'>{product.name}</Link>
+                                                        <Link href={`/product/${basketitem.product.id}`} className='hover:text-gray-600 smooth-transition'>{basketitem.product.name}</Link>
                                                     </h3>
-                                                    <DisplayPrice price={product.price} cssClass={"mr-10"}/>
+                                                    <DisplayPrice price={basketitem.product.price} cssClass={"mr-10"}/>
                                                 </div>
                                                 <p className="mt-1 text-sm text-gray-500">{`${basketitem.color.name}  ${basketitem.size.name}`}</p>
                                             </div>

@@ -30,7 +30,7 @@ export default function ProductInformationClient({product}: Props) {
         shallow
     )
 
-    const addData = (productId: number, color: ColorOptions, size: SizeOptions, quantity: number, price: number) => {
+    const addData = (productId: number, color: ColorOptions, size: SizeOptions, quantity: number, product: Product) => {
         const searchedItemIndex = cart.findIndex( (item) => item.productId == productId && _.isEqual(item.color, color) && _.isEqual(item.size, size))
 
         if (searchedItemIndex > -1) {
@@ -39,18 +39,11 @@ export default function ProductInformationClient({product}: Props) {
 
         } else {
             updateCart([
-                ...cart, {
-                    productId: productId,
-                    color: color,
-                    size: size,
-                    quantity: quantity,
-                    price: price
-                }])
+                ...cart, { productId, color, size, quantity, product }])
         }
         updateNewestItemAdded(
-            { productId, color, size, quantity, price }
+            { productId, color, size, quantity, product }
         )
-
     }
 
     const [selectedColor, setSelectedColor] = useState(product.colors[0])
@@ -157,7 +150,7 @@ export default function ProductInformationClient({product}: Props) {
                 </RadioGroup>
             </div>
             <button
-                onClick={() => addData(product.id, structuredClone(selectedColor), structuredClone(selectedSize), 1, product.price)}
+                onClick={() => addData(product.id, structuredClone(selectedColor), structuredClone(selectedSize), 1, product)}
                 type="button"
                 className="mt-10 flex w-full items-center justify-center py-3 px-8 btn-primary"
             >

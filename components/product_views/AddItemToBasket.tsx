@@ -2,21 +2,17 @@
 import React, {useState} from 'react';
 import {BasketItem, ColorOptions, Product, SizeOptions} from "../../typings";
 import {useStoreBasket} from "../../src/store";
-import {getById} from "../../lib/DATABASE_PRODUCTS";
+import {getProductById} from "../../lib/databases/DATABASE_API";
 
-type ProductAndBasketitem = {
-    product?: Product;
-    basketItem: BasketItem
-}
 
 export default function AddItemToBasket() {
     const [open, setOpen] = useState(false)
-    const [newestProductAdded, setNewestProductAdded] = useState<ProductAndBasketitem>()
+    const [newestProductAdded, setNewestProductAdded] = useState<BasketItem>()
 
     useStoreBasket.subscribe((state, prevState) => {
 
         if ( state.newestItemAdded != null ) {
-            setNewestProductAdded({ product: getById(state.newestItemAdded.productId), basketItem: state.newestItemAdded })
+            setNewestProductAdded( state.newestItemAdded )
             setOpen(true)
             setTimeout(() => setOpen(false), 10000)
         }
@@ -42,10 +38,10 @@ export default function AddItemToBasket() {
                     {newestProductAdded?.product?.name}
                 </p>
                 <p className="text-sm text-gray-700 dark:text-gray-400">
-                    <span>{`${newestProductAdded?.basketItem.size.name}  -  ${newestProductAdded?.basketItem.color.name}`}</span>
+                    <span>{`${newestProductAdded?.size.name}  -  ${newestProductAdded?.color.name}`}</span>
                 </p>
                 <p className="text-sm text-gray-700 dark:text-gray-400">
-                    <span>Qty {newestProductAdded?.basketItem.quantity}</span>
+                    <span>Qty {newestProductAdded?.quantity}</span>
                 </p>
             </div>
         </a>

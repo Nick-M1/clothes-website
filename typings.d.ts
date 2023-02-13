@@ -22,7 +22,6 @@ export type ImageInfo = {
 
 export type Product = {
     id: number;
-    stripe_id: string
     name: string;
     href: '#';
     breadcrumbs: Breadcrumbs[]
@@ -35,6 +34,13 @@ export type Product = {
     description: string;
     highlights: string[];
     details: string;
+    stripe_ids: StripeInfo[]
+}
+
+export type StripeInfo = {
+    color: string,
+    size: string,
+    stripe_id: string
 }
 
 export type StripeCheckoutItem = {
@@ -72,7 +78,7 @@ type BasketItem = {
     color: ColorOptions;
     size: SizeOptions;
     quantity: number;
-    price: number;
+    product: Product;
 }
 
 type ListedItem = {
@@ -98,3 +104,18 @@ type SortOptions = {
     name: string
     func: ((item1: ListeditemTuple, item2: ListeditemTuple) => number)
 }
+
+
+type GetAllProductsResponse = {
+    productsArray: Product[]
+}
+type GetProductByIdResponse = {
+    product: Product
+}
+
+// type Message = {
+//     id: number,
+//     message: string,
+//     created_at: number,
+//     email: string
+// }

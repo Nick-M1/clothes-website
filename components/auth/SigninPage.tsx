@@ -1,6 +1,9 @@
+'use client'
+
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import Link from "next/link";
 import Image from "next/image";
+import {signIn} from "next-auth/react";
 
 export default function SigninPage() {
     return (
@@ -20,7 +23,7 @@ export default function SigninPage() {
                     </h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
                         Not registered?{' '}
-                        <Link href="/createaccount" className="font-medium text-indigo-600 hover:text-indigo-500 smooth-transition">
+                        <Link href="/components/auth/CreateAccount" className="font-medium text-indigo-600 hover:text-indigo-500 smooth-transition">
                             Create an account
                         </Link>
                     </p>
@@ -101,7 +104,7 @@ export default function SigninPage() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <Link href="components#" className="btn-primary btn-bouncy flex bg-blue-500 hover:bg-blue-700">
+                        <button onClick={() => signIn('google')} className="btn-primary btn-bouncy flex bg-blue-500 hover:bg-blue-700">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="currentColor" className="ml-5 mr-2">
                                 <path
@@ -109,7 +112,7 @@ export default function SigninPage() {
                                 />
                             </svg>
                             <span className="sr-only">Continue with</span> Google
-                        </Link>
+                        </button>
                         <Link href="components#" className="bg-black hover:bg-gray-800 flex btn-bouncy btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="currentColor" className="ml-5 mr-2">

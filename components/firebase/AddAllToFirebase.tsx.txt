@@ -1,0 +1,31 @@
+'use client'
+
+import React from 'react';
+import {getAllProducts} from "../../lib/DATABASE_PRODUCTS";
+import {useSession} from "next-auth/react";
+import {addDoc, collection, serverTimestamp} from "@firebase/firestore";
+import {db} from "../../firebase";
+
+type StripeResponse = {
+    productId: string
+    priceId?: string
+}
+
+async function addAllToFirebase() {
+    const allProducts = getAllProducts()
+
+    allProducts.forEach(async product =>
+        await addDoc(
+            collection(db, 'products', product.id.toString(), 'productInfo'),
+            product
+        )
+    )
+}
+
+export default function AddAllToFirebase() {
+    return (
+        <div>
+            <button className='btn-primary m-5' onClick={() => addAllToFirebase()}>Add products to Firebase</button>
+        </div>
+    );
+}

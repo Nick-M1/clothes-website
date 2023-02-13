@@ -4,7 +4,7 @@ import React, {Dispatch, Fragment, SetStateAction, useEffect, useState} from 're
 import {Dialog, Disclosure, Menu, Transition} from '@headlessui/react'
 import {XMarkIcon} from '@heroicons/react/24/outline'
 import {ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon} from '@heroicons/react/20/solid'
-import {getByBreadcrumb, getSubCategories} from "../../../lib/DATABASE_PRODUCTS";
+import {getByBreadcrumb, getSubCategories} from "../../../lib/databases/DATABASE_API";
 import {getSortFilters} from "../../../lib/DATABASE_CATEGORIES";
 import {ListedItem, ListeditemTuple, Product, SortOptions} from "../../../typings";
 import ProductsListing from "./ProductsListing";

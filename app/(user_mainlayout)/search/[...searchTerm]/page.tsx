@@ -11,36 +11,35 @@ type PageProps = {
     }
 }
 
-// // Server-side prebuilding pages
-// export async function generateStaticParams() {
-//     let products: Product[]
-//
-//     // if (process.env.USE_REAL_DB! === 'true') {
-//     //     const productsRef = adminDb.collection('products');
-//     //     const snapshot = await productsRef.get();
-//     //
-//     //     products = []
-//     //     snapshot.forEach( doc => {
-//     //         const product = doc.data() as Product
-//     //         products.push(product)
-//     //     })
-//     //
-//     // } else {
-//         products = await getAllProducts()
-//     // }
-//
-//     const slug_arr = products.map( product => product.breadcrumbs.map(b => convertToSlug(b.name)) )
-//         .flatMap( c => [
-//             [c[0]],
-//             [c[0], c[1]],
-//             [c[0], c[1], c[2]],
-//         ] )
-//
-//     return  slug_arr.map( slug => ({
-//         searchTerm: slug
-//     }));
-//
-// }
+// Server-side prebuilding pages
+export async function generateStaticParams() {
+    let products: Product[]
+
+    if (process.env.USE_REAL_DB! === 'true') {
+        const productsRef = adminDb.collection('products');
+        const snapshot = await productsRef.get();
+
+        products = []
+        snapshot.forEach( doc => {
+            const product = doc.data() as Product
+            products.push(product)
+        })
+
+    } else {
+        products = await getAllProducts()
+    }
+
+    const slug_arr = products.map( product => product.breadcrumbs.map(b => convertToSlug(b.name)) )
+        .flatMap( c => [
+            [c[0]],
+            [c[0], c[1]],
+            [c[0], c[1], c[2]],
+        ] )
+
+    return  slug_arr.map( slug => ({
+        searchTerm: slug
+    }));
+}
 
 export default async function Page({params: {searchTerm}}: PageProps) {
     const currentCategories: string[] = searchTerm

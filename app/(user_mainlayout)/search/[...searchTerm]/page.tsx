@@ -2,8 +2,7 @@ import ProductsFilter from "../../../../components/product_views/search_page/Pro
 import {convertToSlug, titleCase} from "../../../../lib/utils";
 import {getAllProducts, getByBreadcrumb, getSubCategories} from "../../../../lib/databases/DATABASE_API";
 import {getSortFilters} from "../../../../lib/DATABASE_CATEGORIES";
-import {adminDb} from "../../../../firebaseAdmin";
-import {Product} from "../../../../typings";
+
 
 type PageProps = {
     params: {
@@ -13,21 +12,7 @@ type PageProps = {
 
 // Server-side prebuilding pages
 export async function generateStaticParams() {
-    let products: Product[]
-
-    if (process.env.USE_REAL_DB! === 'true') {
-        const productsRef = adminDb.collection('products');
-        const snapshot = await productsRef.get();
-
-        products = []
-        snapshot.forEach( doc => {
-            const product = doc.data() as Product
-            products.push(product)
-        })
-
-    } else {
-        products = await getAllProducts()
-    }
+    const products = await getAllProducts()
 
     const slug_arr = products.map( product => product.breadcrumbs.map(b => convertToSlug(b.name)) )
         .flatMap( c => [

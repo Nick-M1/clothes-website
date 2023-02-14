@@ -1,19 +1,8 @@
-'use client'
-
-import React, {Fragment, useEffect, useState} from 'react';
-import {useStoreBasket, useStoreCurrency} from "../../src/store";
-import {shallow} from "zustand/shallow";
-import {BasketItem, Product} from "../../typings";
+import {Product} from "../../typings";
 import DisplayPrice from "../DisplayPrice";
-import {ArrowRightIcon, CheckIcon, CreditCardIcon, XMarkIcon} from "@heroicons/react/24/solid";
-import {Menu, Transition} from "@headlessui/react";
-import {ChevronDownIcon} from "@heroicons/react/20/solid";
-import _ from "lodash";
-import {MAX_QUANTITY} from "../../lib/DATABASE_CATEGORIES";
-import {classNames} from "../../lib/utils";
+import {ArrowRightIcon, CreditCardIcon} from "@heroicons/react/24/solid";
 import Link from "next/link";
 import Image from "next/image";
-import ResetCart from "./ResetCart";
 
 type Prop = {
     basket: {productId: number, color: string, size: string, quantity: number, product: Product}[],         //todo: use BasketItem[] instead (need sizeOptions & colorOptions in DBs)
@@ -36,9 +25,6 @@ export default function OrderSummary({ basket, amount_subtotal, amount_total, pa
             <div className='hidden md:block w-2/5 h-screen overflow-y-hidden'>
                 <Image width={1000} height={1000} src='/clothes_imgs/vertical/order-summary-img1.jpg' alt='side-pic'/>
             </div>
-
-            <ResetCart/>
-
             <div className='py-10 md:overflow-y-scroll md:h-screen md:scrollbar'>
                 <div className='px-12 md:px-20'>
                     <p className="font-semibold text-sm text-blue-800">Payment successful</p>

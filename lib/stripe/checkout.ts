@@ -1,5 +1,5 @@
 import {loadStripe, Stripe} from "@stripe/stripe-js";
-import {StripeCheckoutItem} from "../typings";
+import {StripeCheckoutItem} from "../../typings";
 
 export async function checkout({lineItems}: {lineItems: StripeCheckoutItem[]}) {
     let stripePromise: Promise<Stripe | null> | null = null

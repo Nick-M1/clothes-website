@@ -14,7 +14,7 @@ import {ChevronDownIcon} from "@heroicons/react/20/solid";
 import {MAX_QUANTITY} from "../../../lib/DATABASE_CATEGORIES";
 import {classNames} from "../../../lib/utils";
 import {useRouter} from "next/navigation";
-import {checkout} from "../../../lib/checkout";
+import {checkout} from "../../../lib/stripe/checkout";
 import Link from "next/link";
 import Image from "next/image";
 

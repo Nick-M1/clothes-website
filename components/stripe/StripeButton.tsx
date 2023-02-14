@@ -1,7 +1,7 @@
 'use client'
 
 
-import {checkout} from "../../lib/checkout";
+import {checkout} from "../../lib/stripe/checkout";
 
 export default function StripeButton() {
 

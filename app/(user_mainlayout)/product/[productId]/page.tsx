@@ -11,10 +11,10 @@ type PageProps = {
 
 // Server-side prebuilding pages
 export async function generateStaticParams() {
-        const products = await getAllProducts()
-        return products.map(product => ({
-            productId: product.id.toString()
-        }));
+    const products = await getAllProducts()
+    return products.map(product => ({
+        productId: product.id.toString()
+    }));
 }
 
 

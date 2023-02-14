@@ -1,9 +1,31 @@
-import {Product} from "../../typings";
+import {BasketItem, Product} from "../../typings";
+import * as stripe from "stripe";
 
 
 export async function __getProductById_MOCK(id: number) {
     const products = await __getAllProducts_MOCK()
     return products.find((product) => product.id == id)
+}
+
+
+export async function __getProductByStripeId_MOCK(stripe_id: string, quantity: number = 0) {
+    const products = await __getAllProducts_MOCK()
+
+    for (const product of products) {
+        for (const stripeId of product.stripe_ids) {
+            if (stripeId.stripe_id === stripe_id) {
+                return {
+                    productId: product.id,
+                    color: stripeId.color,
+                    size: stripeId.size,
+                    quantity: quantity,
+                    product: product
+                }
+            }
+        }
+    }
+
+    throw new Error('Product not found')
 }
 
 export function __getAllProducts_MOCK(): Promise<Product[]> {

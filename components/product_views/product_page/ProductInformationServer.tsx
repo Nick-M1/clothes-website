@@ -10,6 +10,7 @@ import ImageCarousel from "./ImageCarousel";
 import ProductInformationClient from "./ProductInformationClient";
 import Link from "next/link";
 import Image from "next/image";
+import CommentSection from "../comment_section/CommentSection";
 
 
 type Props = {
@@ -137,9 +138,19 @@ export default function ProductInformationServer({product}: Props) {
                         </div>
 
                         <ProductInformationClient product={product}/>
+
+                        <div className='hidden md:block pt-3'>
+                            <hr className="my-4"/>
+                            <p className='text-gray-500 text-sm'>Share</p>
+                            <div className='flex pt-3 gap-6 grayscale opacity-70'>
+                                <Image src={'/social_media/instagram.svg'} alt={'instagram logo'} width={20} height={20}/>
+                                <Image src={'/social_media/facebook.svg'} alt={'facebook logo'} width={20} height={20}/>
+                                <Image src={'/social_media/twitter.svg'} alt={'twitter logo'} width={20} height={20}/>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
+                    <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-7 lg:pr-8">
                         {/* Description and details */}
                         <div>
                             <h3 className="sr-only">Description</h3>
@@ -170,6 +181,8 @@ export default function ProductInformationServer({product}: Props) {
                                 <p className="text-sm text-gray-600">{product.details}</p>
                             </div>
                         </div>
+
+                        <CommentSection product={product}/>
                     </div>
                 </div>
             </div>

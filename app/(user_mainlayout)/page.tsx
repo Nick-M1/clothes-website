@@ -6,7 +6,7 @@ import NewsletterSignup1 from "../../components/highlights/NewsletterSignup1";
 
 export default function HomePage() {
     return (
-        <div className="mt-6">
+        <div className="mt-10">
             <HomepageAd/>
             <div className='py-5'><Ad3/></div>
             <div className='py-5'><SaleAd/></div>

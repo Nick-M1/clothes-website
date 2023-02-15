@@ -1,15 +1,23 @@
-import Demo1 from "../../../components/redis/Demo1";
-
-// const getAllProducts = async () => {
-//     const res = await fetch('http://localhost:3000/api/getAllProducts')
-//     return await res.json() as Promise<GetAllProductsResponse>
-// }
+import CommentSection from "../../../components/product_views/comment_section/CommentSection";
+import {getProductById} from "../../../lib/databases/DATABASE_API";
+import React from "react";
+import NewAddress from "../../../components/user/address/NewAddress";
+import ShippingMenu from "../../../components/user/address/ShippingMenu";
+import ListOrders from "../../../components/user/orders/ListOrders";
+import AllOrders from "../../../components/user/orders/AllOrders";
 
 export default async function Page() {
-    // const allMessages = await getAllProducts()
-    // console.log(allMessages.productsArray.length)
 
-    return <Demo1 />
-    // return <div></div>
+
+    return (
+        <div className='gap-5'>
+            <ShippingMenu/>
+        </div>
+
+
+
+        // <ListOrders/>
+        // <AllOrders/>
+    )
 
 }

@@ -17,7 +17,7 @@ export default function FaqsMain({showSearchbar}: {showSearchbar: boolean}) {
     const [show4, setShow4] = useState(false);
 
     return (
-        <div className=" 2xl:container 2xl:mx-auto lg:px-36 md:py-12 md:px-6 py-9 px-4">
+        <div className="pt-10">
             <h2 className=" font-semibold lg:text-4xl text-3xl lg:leading-9 md:leading-7 leading-9 text-gray-800">Frequently Asked Questions</h2>
             <div className="mt-4 flex md:justify-between md:items-start md:flex-row flex-col justify-start items-start">
                 <div className=" ">
@@ -40,7 +40,7 @@ export default function FaqsMain({showSearchbar}: {showSearchbar: boolean}) {
                     <Image width={500} height={500} src="/clothes_imgs/vertical/faqs-img2.png" alt="Img of Glass bottle" className="w-full md:hidden block drop-shadow-lg rounded-lg" />
                 </div>
                 <div className=" md:w-7/12 lg:w-8/12 w-full md:mt-0 sm:mt-14 mt-10">
-                    {/* <!-- Shipping Section --> */}
+                    {/* <!-- ShippingMenu Section --> */}
                     <div>
                         <div onClick={() => setShow1(!show1)} className=" flex justify-between items-center cursor-pointer">
                             <h3 className=" font-semibold text-xl leading-5 text-gray-800 inline-flex align-text-top">

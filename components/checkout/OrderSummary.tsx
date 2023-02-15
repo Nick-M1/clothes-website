@@ -1,4 +1,4 @@
-import {Product} from "../../typings";
+import {Product, ShippingAddress} from "../../typings";
 import DisplayPrice from "../DisplayPrice";
 import {ArrowRightIcon, CreditCardIcon} from "@heroicons/react/24/solid";
 import Link from "next/link";
@@ -11,6 +11,7 @@ type Prop = {
     amount_total: number
     currencySymbol: string
     payment_method_type: string
+    deliveryinfo: ShippingAddress
 }
 
 const tracking_number = '515478785554584512'
@@ -18,12 +19,12 @@ const tracking_number = '515478785554584512'
 
 // todo: add shipping & tax prices to stripe & use here
 // todo: implement payment_method_type (card, googlepay??)
-export default function OrderSummary({ basket, amount_subtotal, amount_total, payment_method_type, currencySymbol }: Prop) {
+export default function OrderSummary({ basket, amount_subtotal, amount_total, payment_method_type, currencySymbol, deliveryinfo }: Prop) {
 
     return (
         <div className="flex md:flex-row flex-col">
             <div className='hidden md:block w-2/5 h-screen overflow-y-hidden'>
-                <Image width={1000} height={1000} src='/clothes_imgs/vertical/order-summary-img1.jpg' alt='side-pic'/>
+                <Image width={1000} height={1000} src='/clothes_imgs/vertical/order-summary-img1.jpg' alt='side-pic' priority/>
             </div>
             <div className='py-10 md:overflow-y-scroll md:h-screen md:scrollbar'>
                 <div className='px-12 md:px-20'>
@@ -93,11 +94,11 @@ export default function OrderSummary({ basket, amount_subtotal, amount_total, pa
                         <p className="text-sm text-gray-600">
                             <span className='font-semibold text-base leading-normal text-gray-800'> Shipping address </span>
                             <br/>
-                            Kristin Watson
+                            {deliveryinfo.name}
                             <br/>
-                            7363 Cynthia Pass
+                            {deliveryinfo.address}, {deliveryinfo.city}
                             <br/>
-                            Toronto, ON7 4DP
+                            {deliveryinfo.postcode}, {deliveryinfo.country}
                         </p>
                         <div>
                             <span className='font-semibold text-base leading-normal text-gray-800'> Payment </span>

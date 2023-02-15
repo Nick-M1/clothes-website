@@ -35,6 +35,7 @@ export type Product = {
     highlights: string[];
     details: string;
     stripe_ids: StripeInfo[]
+    comments?: CommentItem[]
 }
 
 export type StripeInfo = {
@@ -113,9 +114,21 @@ type GetProductByIdResponse = {
     product: Product
 }
 
-// type Message = {
-//     id: number,
-//     message: string,
-//     created_at: number,
-//     email: string
-// }
+type CommentItem = {
+    productId: number,
+    name: string
+    rating: number
+    comment: string,
+    created_at: number,
+}
+
+type ShippingAddress = {
+    customerId: string
+    name: string
+    address: string
+    city: string
+    state: string
+    postcode: string
+    phonenumber: string
+    country: string
+}

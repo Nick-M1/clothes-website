@@ -11,7 +11,7 @@ import {
 export default function Highlight1() {
     return (
         <div className="2xl:container 2xl:mx-auto md:py-12 py-9 px-5">
-            <div className=" bg-gray-50 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-8 md:gap-12 gap-14 lg:px-20 lg:py-12 py-10 md:px-12 px-4">
+            <div className="bg-gray-50 rounded-lg grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-8 md:gap-12 gap-14 lg:px-20 lg:py-12 py-10 md:px-12 px-4">
 
                 {/* Delivery grid Card */}
                 <div>

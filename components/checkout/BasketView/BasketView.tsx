@@ -57,25 +57,6 @@ export default function BasketView() {
         updateCart(newCart)
     }
 
-    const paymentHandler = async (e: any) => {
-        e.preventDefault();
-
-        console.log('ehhe')
-
-        await checkout({
-            lineItems: cart.map( item => {
-                const stripe_id = item.product.stripe_ids.find(p => p.size === item.size.name && p.color === item.color.name)
-                if (typeof stripe_id === 'undefined')
-                    throw new Error("Stripe-id couldn't be found")
-
-                return {
-                    price: stripe_id.stripe_id,
-                    quantity: item.quantity
-                } as unknown as StripeCheckoutItem
-            } )
-        })
-    };
-
     const hasHydrated = useHasHydrated();
 
     return (
@@ -228,9 +209,9 @@ export default function BasketView() {
                                 }
                             </div>
 
-                            <button onClick={paymentHandler} className="text-base leading-none w-full py-3 btn-primary">
+                            <Link href='/deliveryinfo' className="text-base leading-none w-full py-3 btn-primary">
                                 Checkout
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

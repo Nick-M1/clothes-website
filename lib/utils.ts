@@ -13,6 +13,8 @@ export function titleCase(text: string) {
     return splitStr.join(' ');
 }
 
+const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' } as const
+export const dateFormatter = Intl.DateTimeFormat("en-GB", dateOptions)
 
 export function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')

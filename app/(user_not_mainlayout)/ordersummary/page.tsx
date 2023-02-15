@@ -1,21 +1,16 @@
 import React from 'react';
 import OrderSummary from "../../../components/checkout/OrderSummary";
 import {__getProductByStripeId_MOCK} from "../../../lib/databases/mock_database";
-import {Product} from "../../../typings";
+import {Product, ShippingAddress} from "../../../typings";
 import ResetCart from "../../../components/checkout/ResetCart";
 import {adminDb} from "../../../firebaseAdmin";
 import {uploadToStripe} from "../../../lib/stripe/upload_to_stripe";
-
-// type PageProps = {
-//     searchParams: {
-//         session_id: string
-//     }
-// }
+import {collection, getDocs, query, where} from "@firebase/firestore";
+import {db} from "../../../firebase";
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-// export default async function Page({searchParams: {session_id}}: PageProps) {
 export default async function Page({searchParams}: any) {
 
     if ( !Object.hasOwn(searchParams, 'session_id') )
@@ -32,6 +27,22 @@ export default async function Page({searchParams}: any) {
         basket.push(product)
     }
 
+    // Get selected address
+    const customerId = 'test_123456789'             // todo: useSession
+    const querySnapshot = await getDocs(
+        query(
+            collection(db, "customers"),
+            where('customerId', '==', customerId)
+        )
+    );
+
+    let deliveryinfoJSON: any = null
+    querySnapshot.forEach((doc) => {
+        deliveryinfoJSON = doc.data()
+    });
+
+    const deliveryinfo: ShippingAddress = deliveryinfoJSON.addresses[ deliveryinfoJSON.defaultAddress ]
+
     return (
         <div>
             <ResetCart/>
@@ -41,6 +52,7 @@ export default async function Page({searchParams}: any) {
                 amount_total={response_cart.amount_total}
                 payment_method_type={response_cart.payment_method_type}
                 currencySymbol={response_cart.currencySymbol}
+                deliveryinfo={deliveryinfo}
             />
         </div>
     );

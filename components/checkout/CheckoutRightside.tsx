@@ -83,14 +83,18 @@ export default function CheckoutRightside({showCart}: {showCart: boolean}) {
                     </div>
 
                     : <div className="flex justify-start space-x-2 mt-10">
-                        <div className={`${cart.length === 0 ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
-                        <Link
+                        <div className={`group ${cart.length === 0 ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
+                            <Link
                                 href='/deliveryinfo'
                                 className={`px-5 py-2 inline-block btn-primary ${cart.length === 0 ? 'pointer-events-none' : 'pointer-events-auto'}`}
 
                             >
                                 Delivery options
+                                <span className={`absolute w-44 -top-8 left-0 scale-0 transition-all rounded bg-red-500 p-2 text-xs text-white group-hover:scale-100 ${cart.length === 0 ? '' : 'hidden'}`}>
+                                    No items in basket!
+                                </span>
                             </Link>
+
                         </div>
                         <Link
                             href="/"

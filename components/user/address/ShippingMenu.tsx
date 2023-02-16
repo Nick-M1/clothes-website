@@ -3,7 +3,7 @@ import Link from "next/link";
 import {useCollection} from "react-firebase-hooks/firestore";
 import {collection, query, where} from "@firebase/firestore";
 import {db} from "../../../firebase";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import NewAddress from "./NewAddress";
 import {checkout} from "../../../lib/stripe/checkout";
 import {ShippingAddress, StripeCheckoutItem} from "../../../typings";
@@ -33,7 +33,7 @@ export default function ShippingMenu() {
     const paymentHandler = async (e: any) => {
         e.preventDefault();
 
-        if (deliveryinfo === -1 || addresses.length <= deliveryinfo)            // todo: popup for 'please select an address;
+        if (deliveryinfo === -1 || addresses.length <= deliveryinfo || cart.length === 0)
             return
 
         await fetch('/api/postDefaultAddress', {
@@ -116,13 +116,21 @@ export default function ShippingMenu() {
                                     >
                                         Back
                                     </Link>
-                                    <button
-                                        onClick={paymentHandler}
-                                        className={`px-5 py-2 inline-block btn-primary ${deliveryinfo === -1 || addresses.length <= deliveryinfo ? 'cursor-not-allowed' : 'cursor-pointer'}`}
-                                        disabled={deliveryinfo === -1 || addresses.length <= deliveryinfo}
-                                    >
-                                        Checkout
-                                    </button>
+                                    <div className='group'>
+                                        <button
+                                            onClick={paymentHandler}
+                                            className={`px-5 py-2 inline-block btn-primary ${deliveryinfo === -1 || addresses.length <= deliveryinfo || cart.length === 0  ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                                            disabled={deliveryinfo === -1 || addresses.length <= deliveryinfo || cart.length === 0}
+                                        >
+                                            Checkout
+                                            <span className={`absolute w-[121px] -top-12 left-0 scale-0 transition-all rounded bg-red-500 p-2 text-xs text-white group-hover:scale-100 ${deliveryinfo === -1 || addresses.length <= deliveryinfo ? '' : 'hidden'}`}>
+                                                Please select a delivery address
+                                            </span>
+                                            <span className={`absolute w-[121px] -top-12 left-0 scale-0 transition-all rounded bg-red-500 p-2 text-xs text-white group-hover:scale-100 ${cart.length === 0 ? '' : 'hidden'}`}>
+                                                Your cart is empty
+                                            </span>
+                                        </button>
+                                    </div>
                                 </div>
                             </article>
                         </main>

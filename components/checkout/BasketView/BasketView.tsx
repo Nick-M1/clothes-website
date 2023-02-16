@@ -32,19 +32,10 @@ export const useHasHydrated = () => {
 
 
 export default function BasketView() {
-    const currencySymbol = useStoreCurrency.getState().currency.symbol
-
     const [cart, updateCart, updateNewestItemAdded] = useStoreBasket(
         (state) => [state.cart, state.updateCart, state.updateNewestItemAdded],
         shallow
     )
-
-    const totalPrice = cart.length == 0
-        ? 0
-        : cart
-            .map(p => p.product.price * p.quantity)
-            .reduce((a, b) => a + b )
-
 
     const setQuantity = (itemIdx: number, newQuantity: number) => {
         updateNewestItemAdded(null)

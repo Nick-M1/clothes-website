@@ -7,7 +7,7 @@ export default function Footer() {
     // todo: Dark mode button
 
     return (
-        <footer className="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 border-gray-200 dark:bg-gray-900">
+        <footer className="p-4 bg-white rounded-lg shadow md:px-6 md:pb-5 border-gray-200 dark:bg-gray-900">
             <div className="flex items-center justify-between">
 
                 <div>

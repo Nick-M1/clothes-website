@@ -4,7 +4,7 @@ import Stepper from "../../../components/checkout/Stepper";
 
 export default function CheckoutPage() {
     return (
-        <div>
+        <div className='bg-gray-50'>
             <div className='pl-10 md:px-72 md:ml-32 py-10'>
                 <Stepper currentStateIdx={1}/>
             </div>

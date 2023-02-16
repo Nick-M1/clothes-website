@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode}) {
             <div className="z-20"><AddItemToBasket/></div>
 
             <div className="z-30"><SideOver/></div>
-            <div className="-z-20 py-20">
+            <div className="-z-20 pt-20">
                 {children}
             </div>
 

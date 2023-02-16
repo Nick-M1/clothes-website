@@ -188,7 +188,7 @@ export default function SideOver() {
                                             <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                             <div className="mt-6">
                                                 <Link
-                                                    href="/checkout"
+                                                    href="/basketview" onClick={() => updateSlideover(false)}
                                                     className="flex items-center justify-center px-6 py-3 btn-primary"
                                                 >
                                                     Checkout

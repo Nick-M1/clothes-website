@@ -17,6 +17,7 @@ import {useRouter} from "next/navigation";
 import {checkout} from "../../../lib/stripe/checkout";
 import Link from "next/link";
 import Image from "next/image";
+import CheckoutRightside from "../CheckoutRightside";
 
 
 export const useHasHydrated = () => {
@@ -60,25 +61,19 @@ export default function BasketView() {
     const hasHydrated = useHasHydrated();
 
     return (
-        <>
-            <div className="flex md:flex-row flex-col justify-center" id="cart">
-                <div className="px-10 lg:pl-28 lg:pr-20 w-full lg:overflow-y-auto lg:overflow-x-hidden lg:h-[80vh] scrollbar" id="scroll">
-                    <Link className="flex items-center text-blue-600 hover:text-blue-400 cursor-pointer" href='/'>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width={16} height={16} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <polyline points="15 6 9 12 15 18" />
-                        </svg>
-                        <p className="text-sm pl-2 leading-none">Back</p>
-                    </Link>
-                    <p className="text-3xl font-black leading-10 text-gray-800 pt-3">Shopping Cart</p>
+        <div className="min-h-screen">
+            { hasHydrated ?
+                <div className="flex md:flex-row flex-col justify-center px-2 md:px-32" id="cart">
+                    <div className="md:mr-10 px-6 py-5 w-full md:w-2/3 bg-white rounded border border-gray-200">
+                        <p className="text-2xl font-semibold leading-10 text-gray-800">Shopping Cart</p>
 
-                    {/* Displays list of items - duplicate of 'SlideOver' */}
-                    { hasHydrated ?
-                    <div className="flow-root pt-3">
-                        <hr className='h-px my-6 bg-gray-200 border-0'/>
-                        <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            { cart.map( (basketitem, index) => (
+                        {/* Displays list of items - duplicate of 'SlideOver' */}
+                        <div className="flow-root pt-3">
+                            <hr className='h-px my-6 bg-gray-200 border-0'/>
+                            <ul role="list" className="-my-6 md:my-0 divide-y divide-gray-200">
+                                { cart.length === 0 ? <p className='pt-5'>Cart is empty :(</p> : <></> }
 
+                                { cart.map( (basketitem, index) => (
                                     <li key={index} className="flex py-6">
                                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 drop-shadow-sm">
                                             <Image
@@ -165,57 +160,14 @@ export default function BasketView() {
                                         </div>
                                     </li>
                                 ))}
-                        </ul>
-                    </div>
-                        :<div></div>
-                    }
-
-                </div>
-                <div className="md:w-2/3 w-full h-full">
-                    <div className="flex flex-col md:h-screen md:px-14 pt-10 md:pt-20 pb-5 justify-between overflow-y-auto">
-                        <div className='bg-gray-100 rounded-lg drop-shadow-sm px-9 md:px-12 py-5'>
-                            <p className="text-xl font-semibold leading-9 text-black">Order Summary</p>
-
-                            <div className="flex items-center justify-between pt-6">
-                                <p className="text-sm leading-none text-gray-600">Subtotal</p>
-                                { hasHydrated
-                                    ? <p className="text-sm font-medium leading-none text-black">{currencySymbol}{totalPrice.toFixed(2)}</p>
-                                    : <p className='text-sm opacity-0'></p>
-                                }
-
-                            </div>
-                            <hr className='h-px my-4 bg-gray-300 border-0'/>
-                            <div className="flex items-center justify-between">
-                                <p className="text-sm leading-none text-gray-600">Shipping</p>
-                                { hasHydrated
-                                    ? <p className="text-sm font-medium leading-none text-black">{currencySymbol}30.00</p>
-                                    : <p className='text-sm opacity-0'></p>
-                                }
-                            </div>
-                            <hr className='h-px my-4 bg-gray-200 border-0'/>
-                            <div className="flex items-center justify-between">
-                                <p className="text-sm leading-none text-gray-600">Tax</p>
-                                { hasHydrated
-                                    ? <p className="text-sm font-medium leading-none text-black">{currencySymbol}35.00</p>
-                                    : <p className='text-sm opacity-0'></p>
-                                }
-                            </div>
-                            <hr className='h-px my-4 bg-gray-300 border-0'/>
-                            <div className="flex items-center pb-6 justify-between">
-                                <p className="text-base font-semibold leading-normal text-gray-800">Order total</p>
-                                { hasHydrated
-                                    ? <p className="text-base font-semibold leading-normal text-right text-black">{currencySymbol}{(totalPrice + 35 + 30).toFixed(2)}</p>
-                                    : <p className='text-sm opacity-0'></p>
-                                }
-                            </div>
-
-                            <Link href='/deliveryinfo' className="text-base leading-none w-full py-3 btn-primary">
-                                Checkout
-                            </Link>
+                            </ul>
                         </div>
                     </div>
+
+                    <CheckoutRightside showCart={false}/>
                 </div>
-            </div>
+                :<div></div>
+            }
 
             <style>
                 {` 
@@ -245,6 +197,6 @@ export default function BasketView() {
                     }
                 `}
             </style>
-        </>
+        </div>
     );
 }

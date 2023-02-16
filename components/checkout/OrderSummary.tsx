@@ -26,7 +26,7 @@ export default function OrderSummary({ basket, amount_subtotal, amount_total, pa
             <div className='hidden md:block w-2/5 h-screen overflow-y-hidden'>
                 <Image width={1000} height={1000} src='/clothes_imgs/vertical/order-summary-img1.jpg' alt='side-pic' priority/>
             </div>
-            <div className='py-10 md:overflow-y-scroll md:h-screen md:scrollbar'>
+            <div className='py-14 md:min-h-screen'>
                 <div className='px-12 md:px-20'>
                     <p className="font-semibold text-sm text-blue-800">Payment successful</p>
                     <h2 className="text-4xl tracking-tight font-black leading-10 text-gray-800 py-2">Thank you for ordering</h2>

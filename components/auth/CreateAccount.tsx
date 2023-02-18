@@ -99,11 +99,10 @@ export default function CreateAccount() {
                     </div>
                 </form>
 
-                {/* todo: 'OR' not centred properly  */}
                 <div className="space-y-8">
                     <div className="text-center justify-center border-b border-gray-200">
                         <hr/>
-                        <span className='absolute bottom-[175px] text-xs font-semibold tracking-wide text-gray-600 uppercase bg-gray-50 p-2'>Or</span>
+                        <p className='text-center absolute -translate-y-4 translate-x-52 text-xs font-semibold tracking-wide text-gray-600 bg-white p-2'>OR</p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">

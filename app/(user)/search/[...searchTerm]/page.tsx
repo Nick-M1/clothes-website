@@ -11,20 +11,22 @@ type PageProps = {
 }
 
 // Server-side prebuilding pages
-export async function generateStaticParams() {
-    const products = await getAllProducts()
+// export async function generateStaticParams() {
+//     const products = await getAllProducts()
+//
+//     const slug_arr = products.map( product => product.breadcrumbs.map(b => convertToSlug(b.name)) )
+//         .flatMap( c => [
+//             [c[0]],
+//             [c[0], c[1]],
+//             [c[0], c[1], c[2]],
+//         ] )
+//
+//     return  slug_arr.map( slug => ({
+//         searchTerm: slug
+//     }));
+// }
+export const dynamic = 'force-dynamic'      // due to auth
 
-    const slug_arr = products.map( product => product.breadcrumbs.map(b => convertToSlug(b.name)) )
-        .flatMap( c => [
-            [c[0]],
-            [c[0], c[1]],
-            [c[0], c[1], c[2]],
-        ] )
-
-    return  slug_arr.map( slug => ({
-        searchTerm: slug
-    }));
-}
 
 export default async function Page({params: {searchTerm}}: PageProps) {
     const currentCategories: string[] = searchTerm

@@ -15,12 +15,14 @@ const stripeHandler = async (
     }
 
     const addressPost: ShippingAddress = req.body.newAddressPost
+    const customersRef = adminDb.collection('customers');
 
-    const productsRef = adminDb.collection('customers');
-    await productsRef
-        .doc(addressPost.customerId)
-        .update({
-                addresses: FieldValue.arrayUnion({
+    customersRef.doc(addressPost.customerId).get().then((doc) => {
+        if (!doc.exists) {
+            customersRef.doc(addressPost.customerId).create({
+                customerId: addressPost.customerId,
+                defaultAddress: 0,
+                addresses: [{
                     name: addressPost.name,
                     address: addressPost.address,
                     city: addressPost.city,
@@ -28,12 +30,29 @@ const stripeHandler = async (
                     postcode: addressPost.postcode,
                     phonenumber: addressPost.phonenumber,
                     country: addressPost.country,
-                })
-            }
-        )
+                }]
+            })
+
+        } else {
+            customersRef
+                .doc(addressPost.customerId)
+                .update({
+                        addresses: FieldValue.arrayUnion({
+                            name: addressPost.name,
+                            address: addressPost.address,
+                            city: addressPost.city,
+                            state: addressPost.state,
+                            postcode: addressPost.postcode,
+                            phonenumber: addressPost.phonenumber,
+                            country: addressPost.country,
+                        })
+                    }
+                )
+        }
+    }).catch((error) => console.log("Error getting document:", error));
+
 
     res.status(200).send('')
-
 }
 
 export default stripeHandler

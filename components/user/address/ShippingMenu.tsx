@@ -10,11 +10,15 @@ import {ShippingAddress, StripeCheckoutItem} from "../../../typings";
 import {useStoreBasket} from "../../../src/store";
 import {shallow} from "zustand/shallow";
 import CheckoutRightside from "../../checkout/CheckoutRightside";
+import {useSession} from "next-auth/react";
 
 export default function ShippingMenu() {
-    const customerId = 'test_123456789'             // todo: useSession
+    const { data: session, status: sessionStatus } = useSession()
+    const customerId = sessionStatus == 'authenticated' && session?.user?.email != null ? session?.user.email : 'test_123456789'             // todo: useSession
+
     const [deliveryinfo, setDeliveryinfo] = useState(-1)
     const [addNewAddressPopup, setAddNewAddressPopup] = useState(false)
+    const [recentlyAddedNewAddress, setRecentlyAddedNewAddress] = useState<null | ShippingAddress>(null)
 
     const [addressesSnapshot, loading, error] = useCollection(
         query(
@@ -23,6 +27,8 @@ export default function ShippingMenu() {
         )
     )
     const addresses: ShippingAddress[] = addressesSnapshot?.docs.map(d => d.data().addresses)[0]
+    if ( recentlyAddedNewAddress != null && addresses[addresses.length-1].postcode !== recentlyAddedNewAddress.postcode )
+        addresses.push(recentlyAddedNewAddress)
 
     const cart = useStoreBasket(
         (state) => state.cart,
@@ -54,7 +60,9 @@ export default function ShippingMenu() {
                     price: stripe_id.stripe_id,
                     quantity: item.quantity
                 } as unknown as StripeCheckoutItem
-            } )
+            }),
+
+            email: sessionStatus == 'authenticated' && session?.user?.email != null ? session?.user.email : undefined
         })
     };
 
@@ -71,12 +79,12 @@ export default function ShippingMenu() {
                                     { typeof addresses !== 'undefined'
                                         ? addresses.map( (address, index) =>
                                             <div key={index}>
-                                                <label className="flex p-3 border border-gray-200 rounded-md bg-gray-50 hover:border-blue-400 hover:bg-blue-50 cursor-pointer">
+                                                <label className={`flex p-3 border rounded-md cursor-pointer smooth-transition ${deliveryinfo === index ? 'bg-blue-50 border-blue-500 hover:border-blue-700 hover:bg-blue-100 hover:ring' : 'bg-gray-50 border-gray-200 hover:border-blue-400 hover:bg-blue-50'}`}>
                                                 <span>
                                                     <input
                                                         name="shipping"
                                                         type="radio"
-                                                        className="h-4 w-4 mt-1"
+                                                        className="h-4 w-4 mt-1 smooth-transition"
                                                         onChange={() => setDeliveryinfo(index)}
                                                     />
                                                 </span>
@@ -100,34 +108,34 @@ export default function ShippingMenu() {
                                 <button
                                     type='button'
                                     onClick={() => setAddNewAddressPopup(!addNewAddressPopup)}
-                                    className={`px-4 py-2 inline-block text-blue-600 border border-gray-300 rounded-md hover:bg-gray-100 ${addNewAddressPopup ? 'bg-gray-50' : ''}`}
+                                    className={`btn-secondary inline-block ${addNewAddressPopup ? 'bg-gray-50' : ''}`}
                                 >
                                     <i className="mr-1 fa fa-plus"></i> Add new address
                                 </button>
 
                                 <div className={`${addNewAddressPopup ? 'block' : 'hidden'}`}>
-                                    <NewAddress setAddNewAddressPopup={setAddNewAddressPopup}/>
+                                    <NewAddress setAddNewAddressPopup={setAddNewAddressPopup} setRecentlyAddedNewAddress={setRecentlyAddedNewAddress} />
                                 </div>
 
                                 <div className="flex justify-end space-x-2 mt-10">
                                     <Link
                                         href="/basketview"
-                                        className="px-5 py-2 inline-block text-gray-700 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 hover:text-blue-600"
+                                        className="btn-secondary inline-block"
                                     >
                                         Back
                                     </Link>
                                     <div className='group'>
                                         <button
                                             onClick={paymentHandler}
-                                            className={`px-5 py-2 inline-block btn-primary ${deliveryinfo === -1 || addresses.length <= deliveryinfo || cart.length === 0  ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                                            className={`inline-block btn-primary ${deliveryinfo === -1 || addresses.length <= deliveryinfo || cart.length === 0  ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                                             disabled={deliveryinfo === -1 || addresses.length <= deliveryinfo || cart.length === 0}
                                         >
                                             Checkout
-                                            <span className={`absolute w-[121px] -top-12 left-0 scale-0 transition-all rounded bg-red-500 p-2 text-xs text-white group-hover:scale-100 ${deliveryinfo === -1 || addresses.length <= deliveryinfo ? '' : 'hidden'}`}>
+                                            <span className={`absolute w-[143px] -top-12 left-0 scale-0 transition-all rounded bg-red-500 p-2 text-xs text-white group-hover:scale-100 ${deliveryinfo === -1 || addresses.length <= deliveryinfo ? '' : 'hidden'}`}>
                                                 Please select a delivery address
                                             </span>
-                                            <span className={`absolute w-[121px] -top-12 left-0 scale-0 transition-all rounded bg-red-500 p-2 text-xs text-white group-hover:scale-100 ${cart.length === 0 ? '' : 'hidden'}`}>
-                                                Your cart is empty
+                                            <span className={`absolute w-[143px] -top-12 left-0 scale-0 transition-all rounded bg-red-500 p-2 text-xs text-white group-hover:scale-100 ${cart.length === 0 ? '' : 'hidden'}`}>
+                                                Your cart is empty - add something
                                             </span>
                                         </button>
                                     </div>

@@ -4,6 +4,7 @@ import {useStoreBasket, useStoreCurrency} from "../../src/store";
 import {shallow} from "zustand/shallow";
 import Link from "next/link";
 import Image from "next/image";
+import {signIn, useSession} from "next-auth/react";
 
 export const useHasHydrated = () => {
     const [hasHydrated, setHasHydrated] = useState<boolean>(false);
@@ -16,6 +17,8 @@ export const useHasHydrated = () => {
 };
 
 export default function CheckoutRightside({showCart}: {showCart: boolean}) {
+    const { data: session, status: sessionStatus } = useSession()
+
     const currencySymbol = useStoreCurrency.getState().currency.symbol
 
     const cart = useStoreBasket(
@@ -28,6 +31,30 @@ export default function CheckoutRightside({showCart}: {showCart: boolean}) {
         : cart
             .map(p => p.product.price * p.quantity)
             .reduce((a, b) => a + b )
+
+    const buttonOptions = () => {
+        switch (sessionStatus) {
+            case "authenticated":
+                return (
+                    <Link href='/deliveryinfo' className={`inline-block btn-primary ${cart.length === 0 ? 'pointer-events-none' : 'pointer-events-auto'}`} >
+                        Delivery options
+                        <span className={`absolute w-[200px] -top-8 left-0 scale-0 transition-all rounded bg-red-500 p-2 text-xs text-white group-hover:scale-100 ${cart.length === 0 ? '' : 'hidden'}`}>
+                            No items in basket!
+                        </span>
+                    </Link>
+                )
+
+            case "loading":
+                return <button disabled={true} className='inline-block btn-primary w-20'>.</button>
+
+            case "unauthenticated":
+                return (
+                    <button onClick={() => signIn()} className='inline-block btn-primary' >
+                        Sign in to proceed
+                    </button>
+                )
+        }
+    }
 
     const hasHydrated = useHasHydrated();
 
@@ -62,12 +89,12 @@ export default function CheckoutRightside({showCart}: {showCart: boolean}) {
                         { cart.map( (item, index) =>
                             <figure className="flex items-center mb-4 leading-5">
                                 <div>
-                                    <div className="block relative p-1 h-20 w-20 flex-shrink-0 rounded-md border border-gray-200">
+                                    <div className="block relative p-1 w-16 h-20 flex-shrink-0 rounded-md border border-gray-200">
                                         <Image
                                             fill
                                             src={item.product.images[0].src}
                                             alt={item.product.images[0].alt}
-                                            className='rounded-md'
+                                            className='rounded-md w-16 h-20 overflow-hidden'
                                         />
                                         <span className="absolute -top-2 -right-2 w-6 h-6 text-sm text-center flex items-center justify-center text-white bg-gray-400 rounded-full">
                                             {item.quantity}
@@ -84,21 +111,12 @@ export default function CheckoutRightside({showCart}: {showCart: boolean}) {
 
                     : <div className="flex justify-start space-x-2 mt-10">
                         <div className={`group ${cart.length === 0 ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
-                            <Link
-                                href='/deliveryinfo'
-                                className={`px-5 py-2 inline-block btn-primary ${cart.length === 0 ? 'pointer-events-none' : 'pointer-events-auto'}`}
-
-                            >
-                                Delivery options
-                                <span className={`absolute w-44 -top-8 left-0 scale-0 transition-all rounded bg-red-500 p-2 text-xs text-white group-hover:scale-100 ${cart.length === 0 ? '' : 'hidden'}`}>
-                                    No items in basket!
-                                </span>
-                            </Link>
+                            { buttonOptions() }
 
                         </div>
                         <Link
                             href="/"
-                            className="px-5 py-2 inline-block text-gray-700 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 hover:text-blue-600"
+                            className="inline-block btn-secondary"
                         >
                             Back
                         </Link>

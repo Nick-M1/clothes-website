@@ -3,7 +3,7 @@ import { getFirestore } from 'firebase/firestore'
 // import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyD3TabqtYVUHifAhvsJyjooO1DXwiqKfPg",
+    apiKey: process.env.FIREBASE_CONFIG_APIKEY!,
     authDomain: "clothes-website-eefb8.firebaseapp.com",
     projectId: "clothes-website-eefb8",
     storageBucket: "clothes-website-eefb8.appspot.com",

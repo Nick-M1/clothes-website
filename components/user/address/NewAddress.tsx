@@ -2,6 +2,7 @@
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import { countries } from "countries-list";
 import {ShippingAddress} from "../../../typings";
+import {useSession} from "next-auth/react";
 
 type AddressFields = {
     nameUpper: string,
@@ -12,7 +13,8 @@ type AddressFields = {
     setHook: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function NewAddress({ setAddNewAddressPopup }: {setAddNewAddressPopup: Dispatch<SetStateAction<boolean>>}) {
+export default function NewAddress({ setAddNewAddressPopup, setRecentlyAddedNewAddress }: {setAddNewAddressPopup: Dispatch<SetStateAction<boolean>>, setRecentlyAddedNewAddress: React.Dispatch<React.SetStateAction<ShippingAddress | null>>}) {
+    const {data: session, status: sessionStatus} = useSession()
     const countriesList = Object.values(countries);
 
     const [name, setName]               = useState('')
@@ -49,7 +51,7 @@ export default function NewAddress({ setAddNewAddressPopup }: {setAddNewAddressP
         }
 
         const newAddressPost: ShippingAddress = {          //todo: use session to get user's details - if not logged in, make them log in to comment
-            customerId: 'test_123456789',
+            customerId: session != null && session.user != null ? session.user.email! : 'test_123456789',
             name,
             address,
             city,
@@ -67,12 +69,15 @@ export default function NewAddress({ setAddNewAddressPopup }: {setAddNewAddressP
             body: JSON.stringify({newAddressPost})
         })
 
+        setName('')
         setAddress('')
         setCity('')
         setState('')
         setPostcode('')
         setPhonenumber('')
         setCountry('Andorra')
+
+        setRecentlyAddedNewAddress(newAddressPost)
         setAddNewAddressPopup(false)
     }
 
@@ -94,7 +99,7 @@ export default function NewAddress({ setAddNewAddressPopup }: {setAddNewAddressP
                                             <div className={`mb-4 ${fieldArr.length === 1 ? 'md:col-span-2' : 'md:col-span-1'}`} key={fieldIndex}>
                                                 <label className="block mb-1"> {field.nameUpper} </label>
                                                 <input
-                                                    className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
+                                                    className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full smooth-transition"
                                                     type={field.inputType}
                                                     placeholder={`Enter ${field.nameLower}`}
                                                     required={field.required}
@@ -109,7 +114,7 @@ export default function NewAddress({ setAddNewAddressPopup }: {setAddNewAddressP
 
                                 <div className="mb-4 md:col-span-2">
                                     <label className="block mb-1"> Country </label>
-                                    <select onChange={(e) => setCountry(e.target.value)} value={country} className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full">
+                                    <select onChange={(e) => setCountry(e.target.value)} value={country} className="smooth-transition appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full">
                                         {countriesList.map((countryInfo) => (
                                             <option key={countryInfo.name} value={countryInfo.name}>
                                                 {countryInfo.name}
@@ -120,7 +125,7 @@ export default function NewAddress({ setAddNewAddressPopup }: {setAddNewAddressP
 
                                 <button
                                     type="button"
-                                    className="my-2 px-4 py-2 text-center w-full inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
+                                    className="btn-primary my-2 text-center w-full inline-block bg-blue-600 hover:bg-blue-700"
                                     onClick={(e) => handleSubmit(e)}
                                 >
                                     Add

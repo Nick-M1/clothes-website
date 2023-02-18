@@ -11,15 +11,14 @@ type Prop = {
     amount_total: number
     currencySymbol: string
     payment_method_type: string
-    deliveryinfo: ShippingAddress
+    deliveryinfo: ShippingAddress,
+    stripe_session_id: string
 }
-
-const tracking_number = '515478785554584512'
 
 
 // todo: add shipping & tax prices to stripe & use here
 // todo: implement payment_method_type (card, googlepay??)
-export default function OrderSummary({ basket, amount_subtotal, amount_total, payment_method_type, currencySymbol, deliveryinfo }: Prop) {
+export default function OrderSummary({ basket, amount_subtotal, amount_total, payment_method_type, currencySymbol, deliveryinfo, stripe_session_id }: Prop) {
 
     return (
         <div className="flex md:flex-row flex-col">
@@ -27,16 +26,16 @@ export default function OrderSummary({ basket, amount_subtotal, amount_total, pa
                 <Image width={1000} height={1000} src='/clothes_imgs/vertical/order-summary-img1.jpg' alt='side-pic' priority/>
             </div>
             <div className='py-14 md:min-h-screen'>
-                <div className='px-12 md:px-20'>
+                <div className='px-6 md:px-20'>
                     <p className="font-semibold text-sm text-blue-800">Payment successful</p>
                     <h2 className="text-4xl tracking-tight font-black leading-10 text-gray-800 py-2">Thank you for ordering</h2>
                     <p className='font-[500] text-sm text-gray-500'> We appreciate your order, we're currently processing it. So hang tight and we'll send you confirmation very soon!</p>
 
                     <p className='font-semibold tracking-tight text-sm text-gray-800 pt-10'>Tracking number</p>
-                    <p className='text-sm tracking-wide text-blue-800'>{tracking_number}</p>
+                    <p className='text-sm tracking-wide text-blue-800'>{stripe_session_id.replace(/\D/g, '')}</p>
                 </div>
                 {/* Displays list of items */}
-                <div className="flow-root scale-90 px-7">
+                <div className="flow-root scale-90 md:px-7">
                     <hr className='h-px my-6 bg-gray-200 border-0'/>
                     <ul role="list" className="-my-6 divide-y divide-gray-200">
                         { basket.map( (basketitem, index) => (
@@ -70,7 +69,7 @@ export default function OrderSummary({ basket, amount_subtotal, amount_total, pa
                     </ul>
                 </div>
 
-                <div className="flex flex-col py-5 justify-between scale-90 px-6 md:px-10">
+                <div className="flex flex-col py-5 justify-between scale-90 md:px-10">
                     <hr className='h-px my-4 bg-gray-300 border-0'/>
 
                     <div className="flex items-center justify-between pt-6">

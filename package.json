@@ -8,6 +8,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.9",
     "@heroicons/react": "^2.0.14",
+    "@next-auth/firebase-adapter": "^2.0.0",
     "@next/font": "^13.1.6",
     "@reduxjs/toolkit": "^1.9.2",
     "@stripe/stripe-js": "^1.46.0",
@@ -32,6 +33,7 @@
     "react-dom": "^18.2.0",
     "react-easy-swipe": "^0.0.23",
     "react-firebase-hooks": "^5.1.1",
+    "react-icons": "^4.7.1",
     "react-redux": "^8.0.5",
     "sharp": "^0.31.3",
     "stripe": "^11.10.0",

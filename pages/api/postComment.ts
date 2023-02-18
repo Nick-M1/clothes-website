@@ -22,7 +22,12 @@ const stripeHandler = async (
         .doc(commentPost.productId.toString())
         .update({
                 comments: FieldValue.arrayUnion({
-                    name: commentPost.name, rating: commentPost.rating, comment: commentPost.comment, created_at: Date.now()
+                    email: commentPost.email,
+                    name: commentPost.name,
+                    profile_img: commentPost.profile_img,
+                    rating: commentPost.rating,
+                    comment: commentPost.comment,
+                    created_at: Date.now(),
                 })
             }
         )

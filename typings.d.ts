@@ -116,7 +116,9 @@ type GetProductByIdResponse = {
 
 type CommentItem = {
     productId: number,
+    email: string
     name: string
+    profile_img: string
     rating: number
     comment: string,
     created_at: number,

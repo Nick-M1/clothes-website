@@ -12,6 +12,9 @@ import CurrencySelector from "../CurrencySelector";
 import {BasketItem} from "../../typings";
 import Link from "next/link";
 import Image from "next/image";
+import {signIn, signOut, useSession} from "next-auth/react";
+import AccountNavbarDesktop from "./AccountNavbarDesktop";
+import AccountNavbarMobile from "./AccountNavbarMobile";
 
 
 function classNames(...classes: string[]) {
@@ -38,6 +41,8 @@ const useHasHydrated = () => {
 
 
 export default function Banner() {
+    const { status: statusAuth } = useSession()
+
     const categories = getCategories()
     const pages = getNavPages()
 
@@ -187,18 +192,22 @@ export default function Banner() {
                                     ))}
                                 </div>
 
-                                <div className="space-y-6 border-t border-gray-200 py-6 px-4">
-                                    <div className="flow-root">
-                                        <Link href={`/signin`} className="-m-2 block p-2 font-medium text-gray-900 smooth-transition">
-                                            Sign in
-                                        </Link>
+                                { statusAuth != 'authenticated'
+                                    ? <div className="space-y-6 border-t border-gray-200 py-6 px-4">
+                                        <div className="flow-root">
+                                            <button onClick={() => signIn()} className="-m-2 block p-2 font-medium text-gray-900 smooth-transition">
+                                                Sign in
+                                            </button>
+                                        </div>
+                                        <div className="flow-root">
+                                            <Link href={`/createaccount`} className="-m-2 block p-2 font-medium text-gray-900 smooth-transition">
+                                                Create account
+                                            </Link>
+                                        </div>
                                     </div>
-                                    <div className="flow-root">
-                                        <Link href={`/createaccount`} className="-m-2 block p-2 font-medium text-gray-900 smooth-transition">
-                                            Create account
-                                        </Link>
-                                    </div>
-                                </div>
+
+                                    : <></>
+                                }
                             </Dialog.Panel>
                         </Transition.Child>
                     </div>
@@ -224,7 +233,7 @@ export default function Banner() {
                             </button>
 
                             {/* Logo */}
-                            <div className="ml-4 lg:ml-0">
+                            <div className="ml-1 lg:ml-0">
                                 <Link href={`/`}>
                                     <Image
                                         height={100} width={100}
@@ -237,11 +246,11 @@ export default function Banner() {
                             <span className="hidden sm:block lg:hidden ml-3 text-l font-semibold whitespace-nowrap dark:text-white">Shopping Website</span>
 
                             {/* Flyout menus */}
-                            <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
+                            <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch" >
                                 <div className="flex h-full space-x-8">
                                     {categories.map((category) => (
                                         <Popover key={category.name} className="flex">
-                                            {({ open }) => (
+                                            {({ open, close }) => (
                                                 <>
                                                     <div className="relative flex">
                                                         <Popover.Button
@@ -283,10 +292,10 @@ export default function Banner() {
                                                                                             className="object-cover object-center"
                                                                                         />
                                                                                     </div>
-                                                                                    <a href={`/search/${convertToSlugWrapper(category.name)}/${convertToSlugWrapper(item.name)}`} className="mt-6 block font-medium text-gray-900">
+                                                                                    <Link href={`/search/${convertToSlugWrapper(category.name)}/${convertToSlugWrapper(item.name)}`} onClick={() => close()} className="mt-6 block font-medium text-gray-900">
                                                                                         <span className="absolute inset-0 z-10" aria-hidden="true" />
                                                                                         {item.name}
-                                                                                    </a>
+                                                                                    </Link>
                                                                                     <p aria-hidden="true" className="mt-1">
                                                                                         Shop now
                                                                                     </p>
@@ -306,9 +315,9 @@ export default function Banner() {
                                                                                     >
                                                                                         {section.items.map((item) => (
                                                                                             <li key={item.name} className="flex">
-                                                                                                <a href={`/search/${convertToSlugWrapper(category.name)}/${convertToSlugWrapper(section.name)}/${convertToSlugWrapper(item.name)}`} className="hover:text-gray-800 smooth-transition">
+                                                                                                <Link href={`/search/${convertToSlugWrapper(category.name)}/${convertToSlugWrapper(section.name)}/${convertToSlugWrapper(item.name)}`} onClick={() => close()} className="hover:text-gray-800 smooth-transition">
                                                                                                     {item.name}
-                                                                                                </a>
+                                                                                                </Link>
                                                                                             </li>
                                                                                         ))}
                                                                                     </ul>
@@ -338,15 +347,6 @@ export default function Banner() {
                             </Popover.Group>
 
                             <div className="ml-auto flex items-center">
-                                <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                                    <Link href={`/signin`} className="border-b-2 py-5 mt-1 navbar-text">
-                                        Sign in
-                                    </Link>
-                                    <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                                    <Link href={`/createaccount`} className="border-b-2 py-5 mt-1 navbar-text">
-                                        Create account
-                                    </Link>
-                                </div>
 
                                 <div className="hidden lg:ml-8 lg:flex smooth-transition">
                                     <CurrencySelector/>
@@ -355,6 +355,14 @@ export default function Banner() {
                                 {/* Search */}
                                 <div className="flex lg:ml-6 smooth-transition">
                                     <Searchbar/>
+                                </div>
+
+                                {/* Profile icons */}
+                                <div className='hidden lg:block'>
+                                    <AccountNavbarDesktop/>
+                                </div>
+                                <div className='lg:hidden'>
+                                    <AccountNavbarMobile/>
                                 </div>
 
                                 {/* Cart */}

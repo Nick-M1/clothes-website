@@ -17,20 +17,17 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
 
-    // const session = await getServerSession(authOptions)
+    const session = await getServerSession(authOptions)
     // session returns name, email and profile pic img
+    // console.log(session)
 
     return (
         <html lang="en" className='scrollbar'>
             <body className={`${montserrat.className} h-full`}>
-                {/*<SessionProvider session={session}>*/}
-                {/*    {*/}
-                {/*        !session*/}
-                {/*            ? <SigninPage/>*/}
-                {/*            : children*/}
-                {/*    }*/}
-                {/*</SessionProvider>*/}
-                {children}
+                <SessionProvider session={session}>
+                    {children}
+                </SessionProvider>
+                {/*{children}*/}
             </body>
         </html>
     )

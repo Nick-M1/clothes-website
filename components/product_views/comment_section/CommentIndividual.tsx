@@ -14,7 +14,7 @@ export default function CommentIndividual({ comment }: {comment: CommentItem}) {
                 <div className="flex items-center mb-4 space-x-4">
                     <img
                         className="w-10 h-10 rounded-full"
-                        src="/brand-logo.png"
+                        src={comment.profile_img}
                         alt="user"
                     />
                     <div className="space-y-1 font-medium">

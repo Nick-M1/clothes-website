@@ -18,6 +18,7 @@ import {checkout} from "../../../lib/stripe/checkout";
 import Link from "next/link";
 import Image from "next/image";
 import CheckoutRightside from "../CheckoutRightside";
+import ItemRemovedFromBasket from "../../product_views/ItemRemovedFromBasket";
 
 
 export const useHasHydrated = () => {
@@ -32,6 +33,10 @@ export const useHasHydrated = () => {
 
 
 export default function BasketView() {
+    const [openItemRemovedPopup, setOpenItemRemovedPopup] = useState(false)
+    const [itemRemovedIndex, setItemRemovedIndex] = useState(0)
+    const [itemRemovedName, setItemRemovedName] = useState('')
+
     const [cart, updateCart, updateNewestItemAdded] = useStoreBasket(
         (state) => [state.cart, state.updateCart, state.updateNewestItemAdded],
         shallow
@@ -39,20 +44,24 @@ export default function BasketView() {
 
     const setQuantity = (itemIdx: number, newQuantity: number) => {
         updateNewestItemAdded(null)
-        const newCart = cloneDeep(useStoreBasket.getState().cart)
 
-        if (newQuantity == 0)
-            newCart.splice(itemIdx, 1)          //todo: popup are u sure u want to remove item
-        else
+        if (newQuantity == 0) {
+            setItemRemovedIndex(newQuantity)
+            setItemRemovedName(`${cart[itemIdx].product.name} ${cart[itemIdx].color.name} ${cart[itemIdx].size.name}`)
+            setOpenItemRemovedPopup(true)
+
+        } else {
+            const newCart = cloneDeep(useStoreBasket.getState().cart)
             newCart[itemIdx].quantity = newQuantity
-
-        updateCart(newCart)
+            updateCart(newCart)
+        }
     }
 
     const hasHydrated = useHasHydrated();
 
     return (
         <div className="min-h-screen">
+            <ItemRemovedFromBasket open={openItemRemovedPopup} setOpen={setOpenItemRemovedPopup} itemRemovedIndex={itemRemovedIndex} itemRemovedName={itemRemovedName} updateCart={updateCart} />
             { hasHydrated ?
                 <div className="flex md:flex-row flex-col justify-center px-2 md:px-32" id="cart">
                     <div className="md:mr-10 px-6 py-5 w-full md:w-2/3 bg-white rounded border border-gray-200">

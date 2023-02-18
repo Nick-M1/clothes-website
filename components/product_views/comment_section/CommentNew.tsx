@@ -4,9 +4,11 @@ import {CommentItem} from "../../../typings";
 import {StarIcon} from "@heroicons/react/20/solid";
 import {classNames} from "../../../lib/utils";
 import Link from "next/link";
+import {useSession} from "next-auth/react";
 
 export default function CommentNew({productId}: {productId: number}) {
-    const IS_SIGNEDIN = false                       //todo: check with useSession()
+    const {data: session, status: sessionStatus} = useSession()
+    const IS_SIGNEDIN = sessionStatus === 'authenticated'
 
     const [comment, setComment] = useState('')
     const [starRating, setStarRating] = useState(5)
@@ -15,9 +17,11 @@ export default function CommentNew({productId}: {productId: number}) {
         if (!IS_SIGNEDIN || comment === '')
             return
 
-        const commentPost: CommentItem = {          //todo: use session to get user's details - if not logged in, make them log in to comment
+        const commentPost: CommentItem = {
             productId: productId,
-            name: 'James',
+            email: session?.user?.email != null ? session?.user.email : '--',
+            name: session?.user?.name != null ? session?.user.name : '--',
+            profile_img: session?.user?.image != null ? session?.user.image : '--',
             rating: starRating,
             comment: comment,
             created_at: Date.now()

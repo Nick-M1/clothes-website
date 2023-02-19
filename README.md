@@ -51,7 +51,7 @@ https://shopping-clothes-website.vercel.app/
 - NextAuth keys are for authentication
 
 
-### 🎬 Demo Videos:
+## 🎬 Demo Videos:
 ![DemoGif1.gif](public%2FDemoVids%2FDemoGif1.gif)
 ![DemoGif2.gif](public%2FDemoVids%2FDemoGif2.gif)
 ![DemoGif3.gif](public%2FDemoVids%2FDemoGif3.gif)

@@ -1,27 +1,50 @@
-# Next.js + Tailwind CSS Example
+## 🛍️ Next.js Clothes Website
+[![Project Status: Active.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+### [Demo - hosted on vercel](https://shopping-clothes-website.vercel.app/)
+https://shopping-clothes-website.vercel.app/
 
-## Deploy your own
+![](demo/demo.gif)
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+## ⚡ Features
+1. Home page, Search page + page for each product (using a mobile first approach)
+2. Next Auth authentication required for posting comments and buying products
+3. When ordering, user can select from previous delivery addresses or add a new address
+4. Stripe payment processor
+5. Order summary page for the order + page to view all previous orders by the user
+6. Admin page to upload new products to firebaseDB & stripe
+7. Comment section under each product
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
 
-## How to use
+## 🏗️ Built With:
+1. Next JS 13 _(Beta with app directory)_ + Typescript
+2. React
+3. Tailwindcss
+4. Zustand State Management
+5. Next Auth _(for authentication)_
+6. Firebase database
+7. Stripe _(payment processor)_
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
+## 🌳 Environmental Variables:
+```
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+    STRIPE_SECRET_KEY=
+    
+    FIREBASE_SERVICE_ACCOUNT_KEY=
+    FIREBASE_CONFIG_APIKEY=
+    
+    GOOGLE_ID=
+    GOOGLE_SECRET=
+    
+    FACEBOOK_ID=
+    FACEBOOK_SECRET=
+    
+    NEXTAUTH_URL=
+    NEXTAUTH_SECRET=
 ```
 
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+- Stripe keys are to access Stripe payment processor
+- Firebase keys are to access FirebaseDB
+- Google & Facebook keys are for Next Auth
+- NextAuth keys are for authentication

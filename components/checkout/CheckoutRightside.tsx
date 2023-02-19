@@ -87,7 +87,7 @@ export default function CheckoutRightside({showCart}: {showCart: boolean}) {
                     ? <div>
                         <h2 className="text-lg font-semibold mb-3">Items in cart</h2>
                         { cart.map( (item, index) =>
-                            <figure className="flex items-center mb-4 leading-5">
+                            <figure className="flex items-center mb-4 leading-5" key={index}>
                                 <div>
                                     <div className="block relative p-1 w-16 h-20 flex-shrink-0 rounded-md border border-gray-200">
                                         <Image

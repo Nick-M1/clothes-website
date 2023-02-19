@@ -5,6 +5,7 @@ import {ShippingAddress} from "../../../typings";
 import {useSession} from "next-auth/react";
 
 type AddressFields = {
+    index: number
     nameUpper: string,
     nameLower: string,
     inputType: string,
@@ -25,30 +26,35 @@ export default function NewAddress({ setAddNewAddressPopup, setRecentlyAddedNewA
     const [phonenumber, setPhonenumber] = useState('')
     const [country, setCountry]         = useState('Andorra')
 
+    const allFields = [name, address, city, state, postcode, phonenumber]
+    const [incorrectFields, setIncorrectFields] = useState<boolean[]>([true, true, true, true, true, true])
+
     const fields: AddressFields[][] = [
         [
-            { nameUpper: 'Full Name',    nameLower: 'name',         inputType: 'text',   required: true,   hook: name, setHook: setName},
+            { index: 0, nameUpper: 'Full Name',    nameLower: 'name',         inputType: 'text',   required: true,   hook: name, setHook: setName},
         ],
         [
-            { nameUpper: 'Address',      nameLower: 'address',       inputType: 'text',   required: true,   hook: address, setHook: setAddress},
+            { index: 1, nameUpper: 'Address',      nameLower: 'address',       inputType: 'text',   required: true,   hook: address, setHook: setAddress},
         ],
         [
-            { nameUpper: 'City',         nameLower: 'city',          inputType: 'text',   required: true,   hook: city, setHook: setCity },
-            { nameUpper: 'State',        nameLower: 'state',         inputType: 'text',   required: false,  hook: state, setHook: setState },
+            { index: 2, nameUpper: 'City',         nameLower: 'city',          inputType: 'text',   required: true,   hook: city, setHook: setCity },
+            { index: 3, nameUpper: 'State',        nameLower: 'state',         inputType: 'text',   required: false,  hook: state, setHook: setState },
         ],
         [
-            { nameUpper: 'Postcode',     nameLower: 'postcode',      inputType: 'text', required: true,   hook: postcode, setHook: setPostcode },
-            { nameUpper: 'Phone Number', nameLower: 'phone number',  inputType: 'number',  required: true,   hook: phonenumber, setHook: setPhonenumber },
+            { index: 4, nameUpper: 'Postcode',     nameLower: 'postcode',      inputType: 'text', required: true,   hook: postcode, setHook: setPostcode },
+            { index: 5, nameUpper: 'Phone Number', nameLower: 'phone number',  inputType: 'number',  required: true,   hook: phonenumber, setHook: setPhonenumber },
         ]
     ]
 
     const handleSubmit = async (e: any) => {
         e.preventDefault
 
-        if (address === '' || city === '' || postcode === '' || phonenumber === '') {
-            console.log('missing input')
+        setIncorrectFields(
+            allFields.map(elem => elem != '')
+        )
+
+        if ( name == '' || address == '' || city == '' || state == '' || postcode == '' || phonenumber == '' )
             return
-        }
 
         const newAddressPost: ShippingAddress = {          //todo: use session to get user's details - if not logged in, make them log in to comment
             customerId: session != null && session.user != null ? session.user.email! : 'test_123456789',
@@ -97,9 +103,9 @@ export default function NewAddress({ setAddNewAddressPopup, setRecentlyAddedNewA
 
                                         { fieldArr.map( (field, fieldIndex) =>
                                             <div className={`mb-4 ${fieldArr.length === 1 ? 'md:col-span-2' : 'md:col-span-1'}`} key={fieldIndex}>
-                                                <label className="block mb-1"> {field.nameUpper} </label>
+                                                <label htmlFor="username-error" className={`block mb-1 text-sm font-medium ${incorrectFields[field.index] ? 'text-gray-600' : 'text-red-700 dark:text-red-500' }`}>{field.nameUpper}</label>
                                                 <input
-                                                    className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full smooth-transition"
+                                                    className={`appearance-none border rounded-md py-2 px-3 focus:outline-none w-full smooth-transition ${incorrectFields[field.index] ? 'border-gray-200 bg-gray-100 hover:border-gray-400 focus:border-gray-400' : 'border-red-500 bg-red-50 text-red-900 placeholder-red-700 placeholder:opacity-75 hover:border-red-500 focus:ring-red-500 focus:border-red-500 dark:bg-red-100 dark:border-red-400' }`}
                                                     type={field.inputType}
                                                     placeholder={`Enter ${field.nameLower}`}
                                                     required={field.required}
@@ -125,8 +131,9 @@ export default function NewAddress({ setAddNewAddressPopup, setRecentlyAddedNewA
 
                                 <button
                                     type="button"
-                                    className="btn-primary my-2 text-center w-full inline-block bg-blue-600 hover:bg-blue-700"
+                                    className={`btn-primary my-2 text-center w-full inline-block bg-blue-600 hover:bg-blue-700 ${ name === '' || address === '' || city === '' || state === ''  || postcode === '' || phonenumber === '' ? 'cursor-not-allowed' : ''}`}
                                     onClick={(e) => handleSubmit(e)}
+                                    // disabled={name === '' || address === '' || city === '' || state === ''  || postcode === '' || phonenumber === ''}
                                 >
                                     Add
                                 </button>

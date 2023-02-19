@@ -26,8 +26,10 @@ export default function ShippingMenu() {
             where("customerId", "==", customerId)
         )
     )
-    const addresses: ShippingAddress[] = addressesSnapshot?.docs.map(d => d.data().addresses)[0]
-    if ( recentlyAddedNewAddress != null && addresses[addresses.length-1].postcode !== recentlyAddedNewAddress.postcode )
+    let addresses: ShippingAddress[] = addressesSnapshot?.docs.map(d => d.data().addresses)[0]
+    if (recentlyAddedNewAddress != null && typeof addresses == 'undefined')
+        addresses = [recentlyAddedNewAddress]
+    else if ( recentlyAddedNewAddress != null && addresses[addresses.length-1].postcode !== recentlyAddedNewAddress.postcode )
         addresses.push(recentlyAddedNewAddress)
 
     const cart = useStoreBasket(
@@ -131,10 +133,10 @@ export default function ShippingMenu() {
                                             disabled={deliveryinfo === -1 || addresses.length <= deliveryinfo || cart.length === 0}
                                         >
                                             Checkout
-                                            <span className={`absolute w-[143px] -top-12 left-0 scale-0 transition-all rounded bg-red-500 p-2 text-xs text-white group-hover:scale-100 ${deliveryinfo === -1 || addresses.length <= deliveryinfo ? '' : 'hidden'}`}>
+                                            <span className={`absolute w-[143px] -top-12 left-0 scale-0 transition-all rounded bg-red-500 p-2 text-xs text-white group-hover:scale-100 ${deliveryinfo === -1 || addresses.length <= deliveryinfo ? 'block' : 'hidden'}`}>
                                                 Please select a delivery address
                                             </span>
-                                            <span className={`absolute w-[143px] -top-12 left-0 scale-0 transition-all rounded bg-red-500 p-2 text-xs text-white group-hover:scale-100 ${cart.length === 0 ? '' : 'hidden'}`}>
+                                            <span className={`absolute w-[143px] -top-12 left-0 scale-0 transition-all rounded bg-red-500 p-2 text-xs text-white group-hover:scale-100 ${cart.length === 0 ? 'block' : 'hidden'}`}>
                                                 Your cart is empty - add something
                                             </span>
                                         </button>

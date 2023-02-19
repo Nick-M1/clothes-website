@@ -142,10 +142,10 @@ export default function ProductInformationServer({product}: Props) {
                         <div className='hidden md:block pt-3'>
                             <hr className="my-4"/>
                             <p className='text-gray-500 text-sm'>Share</p>
-                            <div className='flex pt-3 gap-6 grayscale opacity-70'>
-                                <Image src={'/social_media/instagram.svg'} alt={'instagram logo'} width={20} height={20}/>
-                                <Image src={'/social_media/facebook.svg'} alt={'facebook logo'} width={20} height={20}/>
-                                <Image src={'/social_media/twitter.svg'} alt={'twitter logo'} width={20} height={20}/>
+                            <div className='flex pt-3 gap-6 grayscale '>
+                                <Image src={'/social_media/instagram.svg'} alt={'instagram logo'} width={20} height={20} className='opacity-50 hover:opacity-70' />
+                                <Image src={'/social_media/facebook.svg'} alt={'facebook logo'} width={20} height={20} className='opacity-70 hover:opacity-100' />
+                                <Image src={'/social_media/twitter.svg'} alt={'twitter logo'} width={20} height={20} className='opacity-75 hover:opacity-100' />
                             </div>
                         </div>
                     </div>

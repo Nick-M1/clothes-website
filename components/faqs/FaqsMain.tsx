@@ -9,6 +9,7 @@ import {
     MagnifyingGlassCircleIcon
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import {Disclosure, Transition} from "@headlessui/react";
 
 export default function FaqsMain({showSearchbar}: {showSearchbar: boolean}) {
     const [show1, setShow1] = useState(false);
@@ -42,14 +43,15 @@ export default function FaqsMain({showSearchbar}: {showSearchbar: boolean}) {
                 <div className=" md:w-7/12 lg:w-8/12 w-full md:mt-0 sm:mt-14 mt-10">
                     {/* <!-- ShippingMenu Section --> */}
                     <div>
-                        <div onClick={() => setShow1(!show1)} className=" flex justify-between items-center cursor-pointer">
-                            <h3 className=" font-semibold text-xl leading-5 text-gray-800 inline-flex align-text-top">
+                        <div onClick={() => setShow1(!show1)} className="group flex justify-between items-center cursor-pointer">
+                            <h3 className=" font-semibold text-xl leading-5 text-gray-800 group-hover:text-gray-500 smooth-transition inline-flex align-text-top">
                                 <TruckIcon height={30} width={30} />
                                 <div className='ml-3 mt-1.5 hover:text-gray-500'>Shipping</div>
                             </h3>
                             { show1 ? <MinusIcon height={20} width={20}/> : <PlusIcon height={20} width={20} /> }
                         </div>
                         <p className={"font-normal text-base leading-6 text-gray-600 mt-4 w-11/12 " + (show1 ? "block" : "hidden")}>We are covering every major country worldwide. The shipment leaves from US as it is our headquarter. Some extra information you probably need to add here so that the customer is clear of their wanted expectations.</p>
+
                     </div>
 
                     <hr className=" my-7 bg-gray-200" />
@@ -57,10 +59,10 @@ export default function FaqsMain({showSearchbar}: {showSearchbar: boolean}) {
                     {/* <!-- Returns Section --> */}
 
                     <div>
-                        <div onClick={() => setShow2(!show2)} className=" flex justify-between items-center cursor-pointer">
-                            <h3 className=" font-semibold text-xl leading-5 text-gray-800 inline-flex align-text-top">
+                        <div onClick={() => setShow2(!show2)} className="group flex justify-between items-center cursor-pointer">
+                            <h3 className=" font-semibold text-xl leading-5 text-gray-800 group-hover:text-gray-500 smooth-transition inline-flex align-text-top">
                                 <ReceiptRefundIcon height={30} width={30} />
-                                <div className='ml-3 mt-1.5 hover:text-gray-500'>Returns</div>
+                                <div className='ml-3 mt-1.5'>Returns</div>
                             </h3>
                             { show2 ? <MinusIcon height={20} width={20}/> : <PlusIcon height={20} width={20}/> }
                         </div>
@@ -72,8 +74,8 @@ export default function FaqsMain({showSearchbar}: {showSearchbar: boolean}) {
                     {/* <!-- Exchange Section --> */}
 
                     <div>
-                        <div onClick={() => setShow3(!show3)} className=" flex justify-between items-center cursor-pointer">
-                            <h3 className=" font-semibold text-xl leading-5 text-gray-800 inline-flex align-text-top">
+                        <div onClick={() => setShow3(!show3)} className="group flex justify-between items-center cursor-pointer">
+                            <h3 className=" font-semibold text-xl leading-5 text-gray-800 group-hover:text-gray-500 smooth-transition inline-flex align-text-top">
                                 <ArrowPathRoundedSquareIcon height={30} width={30} />
                                 <div className='ml-3 mt-1.5 hover:text-gray-500'>Exchange</div>
                             </h3>
@@ -87,8 +89,8 @@ export default function FaqsMain({showSearchbar}: {showSearchbar: boolean}) {
                     {/* Tracking Section */}
 
                     <div>
-                        <div onClick={() => setShow4(!show4)} className=" flex justify-between items-center cursor-pointer">
-                            <h3 className=" font-semibold text-xl leading-5 text-gray-800 inline-flex align-text-top">
+                        <div onClick={() => setShow4(!show4)} className="group flex justify-between items-center cursor-pointer">
+                            <h3 className=" font-semibold text-xl leading-5 text-gray-800 group-hover:text-gray-500 smooth-transition inline-flex align-text-top">
                                 <MagnifyingGlassCircleIcon height={30} width={30} />
                                 <div className='ml-3 mt-1.5 hover:text-gray-500'>Tracking</div>
                             </h3>

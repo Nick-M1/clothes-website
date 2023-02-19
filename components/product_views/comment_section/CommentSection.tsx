@@ -36,7 +36,7 @@ export default function CommentSection({product}: Prop) {
                                 key={category}
                                 className={({ selected }) =>
                                     classNames(
-                                        selected ? 'text-indigo-600 border-indigo-600' : 'text-gray-900 hover:text-gray-700 border-transparent',
+                                        selected ? 'text-indigo-600 hover:text-indigo-700 border-indigo-600' : 'text-gray-900 hover:text-indigo-600 hover:border-gray-300 border-transparent dark:text-gray-400 dark:hover:text-white',
                                         'flex-1 whitespace-nowrap border-b-2 py-4 px-1 text-base font-medium smooth-transition'
                                     )
                                 }

@@ -4,7 +4,8 @@
 ### [Demo - hosted on vercel](https://shopping-clothes-website.vercel.app/)
 https://shopping-clothes-website.vercel.app/
 
-![](demo/demo.gif)
+[Demo Video 1](public%2FDemoPart1.mp4) <br>
+[Demo Video 2](public%2FDemoPart2.mp4)
 
 ## ⚡ Features
 1. Home page, Search page + page for each product (using a mobile first approach)

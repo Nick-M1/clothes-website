@@ -1,11 +1,11 @@
 ## 🛍️ Next.js Clothes Website
 [![Project Status: Active.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
-### [Demo - hosted on vercel](https://shopping-clothes-website.vercel.app/)
+### [🌐 Demo - hosted on vercel](https://shopping-clothes-website.vercel.app/) 
 https://shopping-clothes-website.vercel.app/
 
-[Demo Video 1](public%2FDemoPart1.mp4) <br>
-[Demo Video 2](public%2FDemoPart2.mp4)
+#### (NOTE: Demo video at bottom)
+
 
 ## ⚡ Features
 1. Home page, Search page + page for each product (using a mobile first approach)
@@ -49,3 +49,11 @@ https://shopping-clothes-website.vercel.app/
 - Firebase keys are to access FirebaseDB
 - Google & Facebook keys are for Next Auth
 - NextAuth keys are for authentication
+
+
+### 🎬 Demo Videos:
+![DemoGif1.gif](public%2FDemoVids%2FDemoGif1.gif)
+![DemoGif2.gif](public%2FDemoVids%2FDemoGif2.gif)
+![DemoGif3.gif](public%2FDemoVids%2FDemoGif3.gif)
+![DemoGif4.gif](public%2FDemoVids%2FDemoGif4.gif)
+![DemoGif5.gif](public%2FDemoVids%2FDemoGif5.gif)

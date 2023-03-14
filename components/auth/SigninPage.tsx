@@ -98,32 +98,31 @@ export default function SigninPage() {
                 </form>
 
                 <div className="space-y-8">
-                    <div className="text-center justify-center border-b border-gray-200">
-                        <hr/>
-                        <p className='text-center absolute -translate-y-4 translate-x-52 text-xs font-semibold tracking-wide text-gray-600 bg-white p-2'>OR</p>
+                    <div className="flex items-center text-center before:content-[''] before:flex-1 before:border-b-2 before:mr-2 after:content-[''] after:flex-1 after:border-b-2 after:ml-2 text-xs font-semibold tracking-wide text-gray-600 ">
+                        OR
                     </div>
 
                     <div className="grid grid-cols-2 gap-x-4">
-                        <button onClick={() => signIn('google')} className="btn-primary btn-bouncy flex bg-blue-500 hover:bg-blue-700">
-                            <BsGoogle size={18} className="ml-5 mr-2 mt-0.5" />
+                        <button onClick={() => signIn('google')} className="btn-primary px-0 btn-bouncy flex justify-center bg-blue-500 hover:bg-blue-700">
+                            <BsGoogle size={18} className="mr-2 mt-0.5" />
                             <span className="sr-only">Continue with</span> Google
                         </button>
-                        <button onClick={() => signIn('facebook')} className="bg-black hover:bg-gray-800 flex btn-bouncy btn-primary">
-                            <BsFacebook size={23} className="ml-5 mr-2" />
+                        <button onClick={() => signIn('facebook')} className="bg-black hover:bg-gray-800 flex justify-center btn-bouncy btn-primary px-0">
+                            <BsFacebook size={23} className="mr-2" />
                             <span className="sr-only">Continue with</span> Facebook
                         </button>
                     </div>
-                    <div className="grid grid-cols-2 gap-x-4">
-                        {/*<button onClick={() => signIn('apple')} className="bg-black hover:bg-gray-800 flex btn-bouncy btn-primary">*/}
-                        {/*    <FaApple size={23} className="ml-5 mr-2" />*/}
-                        {/*    <span className="sr-only">Continue with</span> Apple*/}
-                        {/*</button>*/}
-                        {/* todo: apple login */}
-                        {/*<button onClick={() => signIn('facebook')} className="bg-black hover:bg-gray-800 flex btn-bouncy btn-primary">*/}
-                        {/*    <FaApple size={23} className="ml-5 mr-2" />*/}
-                        {/*    <span className="sr-only">Continue with</span> Apple*/}
-                        {/*</button>*/}
-                    </div>
+                    {/*<div className="grid grid-cols-2 gap-x-4">*/}
+                    {/*    <button onClick={() => signIn('apple')} className="bg-black hover:bg-gray-800 flex btn-bouncy btn-primary">*/}
+                    {/*        <FaApple size={23} className="ml-5 mr-2" />*/}
+                    {/*        <span className="sr-only">Continue with</span> Apple*/}
+                    {/*    </button>*/}
+                    {/*     todo: apple login */}
+                    {/*    <button onClick={() => signIn('facebook')} className="bg-black hover:bg-gray-800 flex btn-bouncy btn-primary">*/}
+                    {/*        <FaApple size={23} className="ml-5 mr-2" />*/}
+                    {/*        <span className="sr-only">Continue with</span> Apple*/}
+                    {/*    </button>*/}
+                    {/*</div>*/}
                 </div>
 
 

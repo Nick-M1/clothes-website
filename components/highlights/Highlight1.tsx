@@ -6,8 +6,6 @@ import {
     ShieldCheckIcon
 } from "@heroicons/react/24/outline";
 
-//todo unused
-
 export default function Highlight1() {
     return (
         <div className="2xl:container 2xl:mx-auto md:py-12 py-9 px-5">

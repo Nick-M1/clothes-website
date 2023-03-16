@@ -12,9 +12,9 @@ import CurrencySelector from "../CurrencySelector";
 import {BasketItem} from "../../typings";
 import Link from "next/link";
 import Image from "next/image";
-import {signIn, signOut, useSession} from "next-auth/react";
-import AccountNavbarDesktop from "./AccountNavbarDesktop";
-import AccountNavbarMobile from "./AccountNavbarMobile";
+import {signIn} from "next-auth/react";
+import ProfileDropdown from "./ProfileDropdown";
+import {Session} from "next-auth";
 
 
 function classNames(...classes: string[]) {
@@ -39,10 +39,12 @@ const useHasHydrated = () => {
     return hasHydrated;
 };
 
+type Props = {
+    sessionAuth: Session | null
+}
 
-export default function Banner() {
-    const { status: statusAuth } = useSession()
 
+export default function Banner({ sessionAuth }: Props) {
     const categories = getCategories()
     const pages = getNavPages()
 
@@ -192,7 +194,7 @@ export default function Banner() {
                                     ))}
                                 </div>
 
-                                { statusAuth != 'authenticated'
+                                { sessionAuth == null
                                     ? <div className="space-y-6 border-t border-gray-200 py-6 px-4">
                                         <div className="flow-root">
                                             <button onClick={() => signIn()} className="-m-2 block p-2 font-medium text-gray-900 smooth-transition">
@@ -357,12 +359,9 @@ export default function Banner() {
                                     <Searchbar/>
                                 </div>
 
-                                {/* Profile icons */}
-                                <div className='hidden lg:block'>
-                                    <AccountNavbarDesktop/>
-                                </div>
-                                <div className='lg:hidden'>
-                                    <AccountNavbarMobile/>
+                                {/* Profile icon */}
+                                <div className=''>
+                                    <ProfileDropdown sessionAuth={sessionAuth}/>
                                 </div>
 
                                 {/* Cart */}

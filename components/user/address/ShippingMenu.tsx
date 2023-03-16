@@ -11,11 +11,13 @@ import {useStoreBasket} from "../../../src/store";
 import {shallow} from "zustand/shallow";
 import CheckoutRightside from "../../checkout/CheckoutRightside";
 import {useSession} from "next-auth/react";
+import {Session} from "next-auth";
 
-export default function ShippingMenu() {
-    const { data: session, status: sessionStatus } = useSession()
-    const customerId = sessionStatus == 'authenticated' && session?.user?.email != null ? session?.user.email : 'test_123456789'             // todo: useSession
+type Props = {
+    sessionAuth: Session
+}
 
+export default function ShippingMenu({ sessionAuth }: Props) {
     const [deliveryinfo, setDeliveryinfo] = useState(-1)
     const [addNewAddressPopup, setAddNewAddressPopup] = useState(false)
     const [recentlyAddedNewAddress, setRecentlyAddedNewAddress] = useState<null | ShippingAddress>(null)
@@ -23,7 +25,7 @@ export default function ShippingMenu() {
     const [addressesSnapshot, loading, error] = useCollection(
         query(
             collection(db, 'customers'),
-            where("customerId", "==", customerId)
+            where("customerId", "==", sessionAuth.user?.email)
         )
     )
     let addresses: ShippingAddress[] = addressesSnapshot?.docs.map(d => d.data().addresses)[0]
@@ -49,7 +51,7 @@ export default function ShippingMenu() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ deliveryinfo, customerId })
+            body: JSON.stringify({ deliveryinfo, customerId: sessionAuth.user?.email })
         })
 
         await checkout({
@@ -64,7 +66,7 @@ export default function ShippingMenu() {
                 } as unknown as StripeCheckoutItem
             }),
 
-            email: sessionStatus == 'authenticated' && session?.user?.email != null ? session?.user.email : undefined
+            email: sessionAuth.user?.email!
         })
     };
 

@@ -15,7 +15,7 @@ function Searchbar() {
     };
 
     return (
-        <div className='md:max-w-md md:mx-auto border-none cursor-pointer max-w-[170px]'>
+        <div className='border-none cursor-pointer w-full'>
             <form onSubmit={handleSearch} className="group relative flex items-center w-full h-12 rounded-lg border border-gray-200 hover:border-gray-400 focus-within:ring-1 focus-within:ring-indigo-600 overflow-hidden smooth-transition">
                 <div className="grid place-items-center h-full w-5 md:w-12 text-gray-300 border-none">
                     <button type="submit" >

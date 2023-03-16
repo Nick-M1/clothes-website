@@ -1,5 +1,4 @@
 import '../../styles/globals.css'
-import {Montserrat} from "@next/font/google"
 import Banner from "../../components/headers/Banner";
 import SideOver from "../../components/product_views/SlideOver";
 import TempBanner from "../../components/headers/TempBanner";

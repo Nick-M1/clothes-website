@@ -18,7 +18,7 @@ function menuitemClassname( divideTop: boolean, { active, disabled }: { active: 
         divideTop ? 'mt-1 border-t border-gray-100' : '',
         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
         disabled ? 'cursor-not-allowed opacity-50' : '',
-        "block w-full text-left py-2.5 px-4 text-sm smooth-transition"
+        "block w-full text-left py-2 px-4 text-sm smooth-transition"
     )
 }
 

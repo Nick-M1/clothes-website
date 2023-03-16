@@ -9,7 +9,6 @@
     "@headlessui/react": "^1.7.9",
     "@heroicons/react": "^2.0.14",
     "@next-auth/firebase-adapter": "^2.0.0",
-    "@next/font": "^13.1.6",
     "@reduxjs/toolkit": "^1.9.2",
     "@stripe/stripe-js": "^1.46.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",

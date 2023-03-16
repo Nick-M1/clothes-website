@@ -368,7 +368,7 @@ export default function Banner({ sessionAuth }: Props) {
                                 <div className="ml-4 flow-root lg:ml-6 cursor-pointer group relative flex justify-center">
                                     <a onClick={() => updateSlideover(true)} className="group -m-2 flex items-center p-2">
                                         <ShoppingBagIcon
-                                            className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-blue-700 dark:text-gray-400 dark:hover:text-white smooth-transition"
+                                            className="h-6 w-6 text-gray-400 group-hover:text-blue-700 dark:text-gray-400 dark:hover:text-white smooth-transition"
                                             aria-hidden="true"
                                         />
                                         <span className="absolute w-20 top-10 scale-0 transition-all rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">Open Cart</span>

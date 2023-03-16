@@ -1,5 +1,10 @@
 import React from 'react';
 import FaqsMain from "../../../components/faqs/FaqsMain";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: 'FAQs'
+}
 
 export default function FaqsPage() {
     return (

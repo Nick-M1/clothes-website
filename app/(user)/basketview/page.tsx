@@ -1,6 +1,11 @@
 import React from 'react';
 import BasketView from "../../../components/checkout/BasketView/BasketView";
 import Stepper from "../../../components/checkout/Stepper";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: 'Checkout'
+}
 
 export default function CheckoutPage() {
     return (

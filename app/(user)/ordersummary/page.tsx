@@ -8,9 +8,13 @@ import {collection, getDocs, query, where} from "@firebase/firestore";
 import {db} from "../../../firebase";
 import {getServerSession} from "next-auth";
 import {authOptions} from "../../../pages/api/auth/[...nextauth]";
+import {Metadata} from "next";
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
+export const metadata: Metadata = {
+    title: 'Order Summary'
+}
 
 export default async function Page({ searchParams }: any) {
     const sessionAuth = await getServerSession(authOptions)

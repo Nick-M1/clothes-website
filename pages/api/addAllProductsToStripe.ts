@@ -14,11 +14,6 @@ type ErrorData = {
     body: string
 }
 
-type StripeResponse = {
-    productId: string
-    priceId?: string
-}
-
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data | ErrorData>
@@ -37,8 +32,6 @@ export default async function handler(
 
     // noinspection ES6MissingAwait
     snapshot.forEach(async doc => {
-        // console.log(doc.id, '=>', doc.data());
-
         const product = doc.data() as Product
 
         await productsRef

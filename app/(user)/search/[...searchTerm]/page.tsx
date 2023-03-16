@@ -1,7 +1,13 @@
 import ProductsFilter from "../../../../components/product_views/search_page/ProductsFilter";
 import {convertToSlug, titleCase} from "../../../../lib/utils";
-import {getAllProducts, getByBreadcrumb, getSubCategories} from "../../../../lib/databases/DATABASE_API";
+import {
+    getAllProducts,
+    getByBreadcrumb,
+    getProductById,
+    getSubCategories
+} from "../../../../lib/databases/DATABASE_API";
 import {getSortFilters} from "../../../../lib/DATABASE_CATEGORIES";
+import {Metadata} from "next";
 
 
 type PageProps = {
@@ -26,7 +32,10 @@ type PageProps = {
 //     }));
 // }
 export const dynamic = 'force-dynamic'      // due to auth
-
+export async function generateMetadata({params: { searchTerm }}: PageProps): Promise<Metadata> {
+    const title = searchTerm.pop()
+    return { title: typeof title == 'undefined' ? 'Search' : titleCase(title) }
+}
 
 export default async function Page({params: {searchTerm}}: PageProps) {
     const currentCategories: string[] = searchTerm

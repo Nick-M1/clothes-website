@@ -4,6 +4,11 @@ import React from "react";
 import {getServerSession} from "next-auth";
 import {authOptions} from "../../../pages/api/auth/[...nextauth]";
 import SigninRedirecting from "../../../components/auth/SigninRedirecting";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: 'Checkout'
+}
 
 export default async function Page() {
     const sessionAuth = await getServerSession(authOptions)

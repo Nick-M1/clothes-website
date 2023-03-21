@@ -52,7 +52,7 @@ export default function SideOver() {
         <>
             <ItemRemovedFromBasket open={openItemRemovedPopup} setOpen={setOpenItemRemovedPopup} itemRemovedIndex={itemRemovedIndex} itemRemovedName={itemRemovedName} updateCart={updateCart} />
             <Transition.Root show={slideoverOpen} as={Fragment}>
-                <Dialog as="div" className="relative z-10 h-screen-withmobile" onClose={updateSlideover}>
+                <Dialog as="div" className="relative z-10" onClose={updateSlideover}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-in-out duration-500"
@@ -62,10 +62,10 @@ export default function SideOver() {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity h-screen-withmobile" />
+                        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                     </Transition.Child>
 
-                    <div className="fixed inset-0 overflow-hidden h-screen-withmobile">
+                    <div className="fixed inset-0 overflow-hidden">
                         <div className="absolute inset-0">
                             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
                                 <Transition.Child
@@ -73,8 +73,10 @@ export default function SideOver() {
                                     enter="transform transition ease-in-out duration-500 sm:duration-700"
                                     enterFrom="translate-x-full"
                                     enterTo="translate-x-0"
+                                    // enterTo="-translate-x-14 md:translate-x-0"
                                     leave="transform transition ease-in-out duration-500 sm:duration-700"
                                     leaveFrom="translate-x-0"
+                                    // leaveFrom="-translate-x-14 md:translate-x-0"
                                     leaveTo="translate-x-full"
                                 >
                                     <Dialog.Panel className="pointer-events-auto w-screen max-w-md h-screen-withmobile overflow-y-clip">
@@ -96,7 +98,7 @@ export default function SideOver() {
 
                                                 {/* Displays list of items - duplicate of 'BasketView' */}
                                                 <div className="mt-8">
-                                                    <div className="">
+                                                    <div className="flow-root">
                                                         <ul role="list" className="-my-6 divide-y divide-gray-200">
                                                             { cart.map( (basketitem, index) => (
 

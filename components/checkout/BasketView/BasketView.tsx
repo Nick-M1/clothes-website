@@ -60,7 +60,7 @@ export default function BasketView() {
     const hasHydrated = useHasHydrated();
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen-withmobile">
             <ItemRemovedFromBasket open={openItemRemovedPopup} setOpen={setOpenItemRemovedPopup} itemRemovedIndex={itemRemovedIndex} itemRemovedName={itemRemovedName} updateCart={updateCart} />
             { hasHydrated ?
                 <div className="flex md:flex-row flex-col justify-center px-2 md:px-32" id="cart">

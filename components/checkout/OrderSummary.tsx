@@ -22,7 +22,7 @@ export default function OrderSummary({ basket, amount_subtotal, amount_total, pa
 
     return (
         <div className="flex md:flex-row flex-col">
-            <div className='hidden md:block w-2/5 h-screen overflow-y-hidden'>
+            <div className='hidden md:block w-2/5 h-screen-withmobile overflow-y-hidden'>
                 <Image width={1000} height={1000} src='/clothes_imgs/vertical/order-summary-img1.jpg' alt='side-pic' priority/>
             </div>
             <div className='py-14 md:min-h-screen'>

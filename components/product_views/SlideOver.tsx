@@ -65,8 +65,8 @@ export default function SideOver() {
                         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                     </Transition.Child>
 
-                    <div className="fixed inset-0 overflow-hidden">
-                        <div className="absolute inset-0 overflow-hidden">
+                    <div className="fixed inset-0 overflow-hidden h-screen-withmobile">
+                        <div className="absolute inset-0">
                             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
                                 <Transition.Child
                                     as={Fragment}
@@ -78,8 +78,8 @@ export default function SideOver() {
                                     leaveTo="translate-x-full"
                                 >
                                     <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                                        <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                                            <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6 scrollbar">
+                                        <div className="flex h-full flex-col bg-white shadow-xl">
+                                            <div className="flex-1 overflow-y-auto h-[60dvh] py-6 px-4 sm:px-6 scrollbar">
                                                 <div className="flex items-start justify-between">
                                                     <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
                                                     <div className="ml-3 flex h-7 items-center">
@@ -129,7 +129,7 @@ export default function SideOver() {
                                                                             </div>
 
                                                                             <div className="custom-number-input h-10">
-                                                                                <div className="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1 drop-shadow-sm">
+                                                                                <div className="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1 drop-shadow-sm z-30">
 
 
 
@@ -144,7 +144,7 @@ export default function SideOver() {
                                                                                             </Menu.Button>
                                                                                         </div>
 
-                                                                                        {/* SORTING */}
+                                                                                        {/* Quantity selector */}
                                                                                         <Transition
                                                                                             as={Fragment}
                                                                                             enter="transition ease-out duration-100"
@@ -155,7 +155,7 @@ export default function SideOver() {
                                                                                             leaveTo="transform opacity-0 scale-95"
                                                                                         >
                                                                                             <Menu.Items
-                                                                                                className="overflow-y-scroll scrollbar max-h-28 z-10 absolute right-0 mt-2 w-16 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                                                                className="overflow-y-scroll scrollbar max-h-28 z-30 absolute right-0 mt-2 w-16 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                                                                 <div className="py-1">
                                                                                                     {_.range(0, MAX_QUANTITY).map( newQuantity => (
                                                                                                         <Menu.Item key={index}>

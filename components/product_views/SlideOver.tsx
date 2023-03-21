@@ -96,7 +96,7 @@ export default function SideOver() {
 
                                                 {/* Displays list of items - duplicate of 'BasketView' */}
                                                 <div className="mt-8">
-                                                    <div className="flow-root">
+                                                    <div className="">
                                                         <ul role="list" className="-my-6 divide-y divide-gray-200">
                                                             { cart.map( (basketitem, index) => (
 

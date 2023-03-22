@@ -14,16 +14,13 @@ export default async function Layout({children}: { children: React.ReactNode }) 
     return (
         <>
             <SideOver/>
-            {/*<div>*/}
-            <div className="z-10 absolute w-[100dvh] md:w-full"><Banner sessionAuth={sessionAuth}/></div>
-            <div className="z-20 absolute w-[100dvh] md:w-full"><TempBanner/></div>
+            <div className="z-10 absolute w-[100dvw] md:w-full"><Banner sessionAuth={sessionAuth}/></div>
+            <div className="z-20 absolute w-[100dvw] md:w-full"><TempBanner/></div>
             <div className="z-20"><AddItemToBasket/></div>
             <div className="-z-20 pt-20">
                 {children}
             </div>
-
                 <Footer/>
-            {/*</div>*/}
         </>
     )
 }

@@ -123,8 +123,8 @@ export default function SideOver() {
                                             </button>
                                         </div>
                                     </Transition.Child>
-                                    <div className="flex h-[100svh] flex-col overflow-y-clip bg-white py-6 shadow-xl">
-                                        <div className="px-4 sm:px-6">
+                                    <div className="flex h-[100svh] flex-col overflow-y-clip snap-x bg-white py-6 shadow-xl">
+                                        <div className="snap-start px-4 sm:px-6">
                                             <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
                                                 Panel title
                                             </Dialog.Title>

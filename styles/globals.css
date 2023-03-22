@@ -34,7 +34,7 @@
 
 @layer components {
     .max-w-screen-withmobile {
-        @apply max-w-[100dvh] lg:max-w-screen
+        @apply max-w-[100dvw] lg:max-w-screen
     }
     .h-screen-withmobile {
         @apply h-screen h-[100dvh] lg:h-screen

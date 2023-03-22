@@ -1,8 +1,5 @@
+import Testing3 from "./TESTING_3";
 
-
-export default async function Page() {
-    return (
-        <div className=''>
-        </div>
-    )
+export default function Page() {
+   return <Testing3/>
 }

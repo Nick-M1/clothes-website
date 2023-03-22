@@ -77,7 +77,7 @@ export default function SideOver() {
                                     leaveFrom="translate-x-0"
                                     leaveTo="translate-x-full"
                                 >
-                                    <Dialog.Panel className="pointer-events-auto w-screen max-w-md h-screen-withmobile">
+                                    <Dialog.Panel className="pointer-events-auto w-screen-withmobile max-w-md h-screen-withmobile">
                                         <div className="flex h-full flex-col bg-white shadow-xl">
                                             <div className="flex-1 overflow-y-auto h-[60dvh] py-6 px-4 sm:px-6 scrollbar overscroll-none">
                                                 <div className="flex items-start justify-between">

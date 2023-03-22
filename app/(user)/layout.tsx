@@ -15,12 +15,12 @@ export default async function Layout({children}: { children: React.ReactNode }) 
         <>
             <SideOver/>
             {/*<div>*/}
-                <div className="z-10 absolute w-full"><Banner sessionAuth={sessionAuth}/></div>
-                <div className="z-20 absolute w-full"><TempBanner/></div>
-                <div className="z-20"><AddItemToBasket/></div>
-                <div className="-z-20 pt-20">
-                    {children}
-                </div>
+            <div className="z-10 absolute md:w-full"><Banner sessionAuth={sessionAuth}/></div>
+            <div className="z-20 absolute md:w-full"><TempBanner/></div>
+            <div className="z-20"><AddItemToBasket/></div>
+            <div className="-z-20 pt-20">
+                {children}
+            </div>
 
                 <Footer/>
             {/*</div>*/}

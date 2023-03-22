@@ -112,7 +112,7 @@ export default function SideOver() {
                                         leaveFrom="opacity-100"
                                         leaveTo="opacity-0"
                                     >
-                                        <div className="absolute fixed top-0 left-0 -ml-8 flex pt-4 pr-2 sm:-ml-10 sm:pr-4">
+                                        <div className="absolute top-0 left-0 -ml-8 flex pt-4 pr-2 sm:-ml-10 sm:pr-4">
                                             <button
                                                 type="button"
                                                 className="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
@@ -123,7 +123,7 @@ export default function SideOver() {
                                             </button>
                                         </div>
                                     </Transition.Child>
-                                    <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                                    <div className="fixed flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
                                         <div className="px-4 sm:px-6">
                                             <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
                                                 Panel title

@@ -52,8 +52,7 @@ export default function SideOver() {
     return (
         <>
             <ItemRemovedFromBasket open={openItemRemovedPopup} setOpen={setOpenItemRemovedPopup} itemRemovedIndex={itemRemovedIndex} itemRemovedName={itemRemovedName} updateCart={updateCart} />
-            <Transition.Root show={true} as={Fragment}>
-                {/*// slideoverOpen*/}
+            <Transition.Root show={slideoverOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-30" onClose={updateSlideover}>
                     <Transition.Child
                         as={Fragment}

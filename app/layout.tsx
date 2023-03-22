@@ -39,23 +39,3 @@ export default async function RootLayout({
         </html>
     )
 }
-
-
-// export default async function RootLayout({
-//   children,
-// }: {
-//   children: React.ReactNode
-// }) {
-//
-//     const session = await getServerSession(authOptions)
-//
-//     return (
-//         <html lang="en" className='h-full bg-gray-50 scrollbar'>
-//             <body className={`${montserrat.className} h-full`}>
-//                 <SessionProvider session={session}>
-//                     {children}
-//                 </SessionProvider>
-//             </body>
-//         </html>
-//     )
-// }

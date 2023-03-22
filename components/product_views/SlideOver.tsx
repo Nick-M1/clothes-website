@@ -79,7 +79,7 @@ export default function SideOver() {
                                 >
                                     <Dialog.Panel className="pointer-events-auto w-screen max-w-md h-screen-withmobile">
                                         <div className="flex h-full flex-col bg-white shadow-xl">
-                                            <div className="flex-1 overflow-y-auto h-[60dvh] py-6 px-4 sm:px-6 scrollbar">
+                                            <div className="flex-1 overflow-y-auto h-[68dvh] py-6 px-4 sm:px-6 scrollbar overscroll-none">
                                                 <div className="flex items-start justify-between">
                                                     <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
                                                     <div className="ml-3 flex h-7 items-center">
@@ -190,7 +190,7 @@ export default function SideOver() {
                                                 </div>
                                             </div>
 
-                                            <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
+                                            <div className="h-[32dvh] border-t border-gray-200 py-6 px-4 sm:px-6">
                                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                                     <p>Subtotal</p>
                                                     <DisplayBasketTotal cssClass={'mr-10'}/>

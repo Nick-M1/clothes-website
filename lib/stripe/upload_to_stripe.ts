@@ -14,8 +14,12 @@ export type PostStripeResponse = {
     payment_method_type: string
 }
 
-export const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY!)
+import Stripe from 'stripe';
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: '2022-11-15',
+})
 
 export async function uploadToStripe(session_id: string, sessionAuth: Session) {
     const sessionStripe = await stripe.checkout.sessions.retrieve(session_id);
@@ -58,10 +62,11 @@ export async function uploadToStripe(session_id: string, sessionAuth: Session) {
         basket: lineItems.data.map((item: any) => item.price.id),
         quantities: lineItems.data.map((item: any) => item.quantity),
 
-        amount_subtotal: sessionStripe.amount_subtotal / 100,
-        amount_total: sessionStripe.amount_total / 100,
+        amount_subtotal: (sessionStripe.amount_subtotal || 10) / 100,
+        amount_total: (sessionStripe.amount_total || 10) / 100,
         currencySymbol: currencySymbol(),
         payment_method_type: sessionStripe.payment_method_types[0]
     }
+
     return response_cart
 }

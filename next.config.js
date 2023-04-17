@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
-  optimizeFonts: false,
   experimental: {
     appDir: true
   },

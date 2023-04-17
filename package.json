@@ -13,7 +13,6 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
     "@types/lodash.isequal": "^4.5.6",
-    "@upstash/redis": "^1.20.0",
     "countries-list": "^2.6.1",
     "encoding": "^0.1.13",
     "eslint-config-next": "^13.1.6",
@@ -21,7 +20,6 @@
     "firebase-admin": "^11.5.0",
     "flowbite": "^1.6.3",
     "flowbite-react": "^0.3.8",
-    "ioredis": "^5.3.1",
     "lodash": "^4.17.21",
     "next": "13.2.4",
     "next-auth": "^4.20.1",
@@ -32,7 +30,8 @@
     "react-firebase-hooks": "^5.1.1",
     "react-icons": "^4.7.1",
     "react-spinkit": "^3.0.0",
-    "stripe": "^11.10.0",
+    "sharp": "^0.32.0",
+    "stripe": "^12.1.1",
     "zustand": "^4.3.2"
   },
   "devDependencies": {

@@ -4,6 +4,7 @@ import {SessionProvider} from "../components/auth/SessionProvider";
 import {getServerSession} from "next-auth";
 import {authOptions} from "../pages/api/auth/[...nextauth]";
 import {Metadata} from "next";
+import React from "react";
 
 const montserrat = Montserrat({
     weight: ['400', '700'],
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     },
     description: 'Shopping Website, for users to purchase clothes online',
     keywords: ['Next.js', 'React', 'JavaScript', 'Clothes', 'Shopping', 'Online'],
-    authors: [{name: 'Nick'}],
+    authors: [{ name: 'Nick' }],
     icons: '/brand-logo.png'
 }
 

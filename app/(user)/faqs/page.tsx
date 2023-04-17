@@ -8,6 +8,8 @@ export const metadata: Metadata = {
 
 export default function FaqsPage() {
     return (
-        <div className='2xl:container 2xl:mx-auto lg:px-36 md:py-12 md:px-6 px-4 py-8'><FaqsMain showSearchbar={false}/></div>
+        <div className='2xl:container 2xl:mx-auto lg:px-36 md:py-12 md:px-6 px-4 py-8'>
+            <FaqsMain showSearchbar={false}/>
+        </div>
     );
 }

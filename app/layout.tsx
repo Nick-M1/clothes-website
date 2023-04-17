@@ -32,7 +32,7 @@ export default async function RootLayout({
 
     return (
         <html lang="en" className='scrollbar'>
-            <body className={`${montserrat.className} h-full`}>
+            <body className={`${montserrat.className}`}>
                 <SessionProvider session={session}>
                     {children}
                 </SessionProvider>
